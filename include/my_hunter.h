@@ -20,6 +20,7 @@ typedef struct window {
 } window_s;
 
 typedef struct bird {
+    int dir;
     sfTexture *bird_texture;
     sfSprite * bird_sprite;
     sfVector2f bird_pos;

@@ -22,6 +22,7 @@ void init_window(window_s *window)
 
 void init_bird(bird_s *bird, window_s *window)
 {
+    bird->dir = 1;
     bird->bird_texture = sfTexture_createFromFile("images/bird.png", NULL);
     bird->bird_sprite = sfSprite_create();
     bird->bird_pos.x = -50;

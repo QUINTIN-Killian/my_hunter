@@ -30,8 +30,6 @@ typedef struct window {
 
 typedef struct bird {
     int dir;
-    int coef;
-    float velocity;
     sfTexture *bird_texture;
     sfSprite *bird_sprite;
     sfVector2f bird_pos;
@@ -43,7 +41,7 @@ typedef struct bird {
 //init.c :
 void init_background(background_s *background);
 void init_window(window_s *window);
-void init_bird(bird_s *bird, window_s *window, int coef);
+void init_bird(bird_s *bird, window_s *window);
 void init_rect(sfIntRect *rect);
 
 //my_hunter.c :

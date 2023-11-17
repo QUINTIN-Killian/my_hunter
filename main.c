@@ -23,7 +23,7 @@ int main(int ac, char **av)
     init_window(&window);
     bird.bird_texture = sfTexture_createFromFile("images/bird.png", NULL);
     bird.bird_sprite = sfSprite_create();
-    init_bird(&bird, &window, 5);
+    init_bird(&bird, &window);
     init_rect(&rect);
     main_loop(&bird, &window, &rect);
     return 0;

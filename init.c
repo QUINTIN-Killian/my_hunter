@@ -29,11 +29,9 @@ void init_window(window_s *window)
     window->window_size = sfRenderWindow_getSize(window->window_info);
 }
 
-void init_bird(bird_s *bird, window_s *window, int coef)
+void init_bird(bird_s *bird, window_s *window)
 {
     bird->dir = 1;
-    bird->coef = coef;
-    bird->velocity = 10 + my_randomizer(bird->coef);
     bird->bird_pos.x = -50;
     bird->bird_pos.y = my_randomizer(
     sfRenderWindow_getSize(window->window_info).y - 110);

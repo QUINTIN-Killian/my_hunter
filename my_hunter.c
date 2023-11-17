@@ -17,7 +17,7 @@ static void bird_loop(sfClock *clock, bird_s *bird,
 
     time = sfClock_getElapsedTime(clock);
     seconds = time.microseconds / 1000000.0;
-    if (seconds > 1 / bird->velocity) {
+    if (seconds > 0.1) {
         move_rect(rect, bird, 3, 330);
         place_bird(window, bird);
         move_bird(window, bird);

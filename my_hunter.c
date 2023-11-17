@@ -28,14 +28,18 @@ static void bird_loop(sfClock *clock, bird_s *bird,
 
 void main_loop(bird_s *bird, window_s *window, sfIntRect *rect)
 {
-    sfClock *clock;
+    sfClock *clock = sfClock_create();
+    background_s background;
 
-    clock = sfClock_create();
+    init_background(&background);
     while (sfRenderWindow_isOpen(window->window_info)) {
         sfRenderWindow_clear(window->window_info, sfBlack);
-        generate_main_theme_background(window);
+        sfRenderWindow_drawSprite(window->window_info,
+        background.background_sprite, NULL);
         sfSprite_setTextureRect(bird->bird_sprite, *rect);
         get_event(window->window_info);
         bird_loop(clock, bird, window, rect);
     }
+    sfSprite_destroy(background.background_sprite);
+    sfSprite_destroy(bird->bird_sprite);
 }

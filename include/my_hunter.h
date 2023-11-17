@@ -16,6 +16,11 @@
 #include <SFML/System/Time.h>
 #include <SFML/System/Types.h>
 
+typedef struct background {
+    sfTexture *background_texture;
+    sfSprite *background_sprite;
+} background_s;
+
 typedef struct window {
     sfRenderWindow *window_info;
     sfVector2u window_size;
@@ -28,7 +33,7 @@ typedef struct bird {
     int coef;
     float velocity;
     sfTexture *bird_texture;
-    sfSprite * bird_sprite;
+    sfSprite *bird_sprite;
     sfVector2f bird_pos;
 } bird_s;
 
@@ -36,6 +41,7 @@ typedef struct bird {
     #define MY_HUNTER_H_
 
 //init.c :
+void init_background(background_s *background);
 void init_window(window_s *window);
 void init_bird(bird_s *bird, window_s *window, int coef);
 void init_rect(sfIntRect *rect);
@@ -47,7 +53,8 @@ void main_loop(bird_s *bird, window_s *window, sfIntRect *rect);
 int my_randomizer(int nb);
 
 //background.c :
-void generate_main_theme_background(window_s *window);
+void generate_main_theme_background(window_s *window,
+    background_s *background);
 
 //events.c :
 void get_event(sfRenderWindow *window);

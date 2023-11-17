@@ -44,18 +44,17 @@ void init_window(window_s *window);
 void init_bird(bird_s *bird, window_s *window);
 void init_rect(sfIntRect *rect);
 
+//sound.c :
+sfMusic *generate_main_music(void);
+
 //my_hunter.c :
 void main_loop(bird_s *bird, window_s *window, sfIntRect *rect);
 
 //my_functions.c :
 int my_randomizer(int nb);
 
-//background.c :
-void generate_main_theme_background(window_s *window,
-    background_s *background);
-
 //events.c :
-void get_event(sfRenderWindow *window);
+void get_event(window_s *window, bird_s *bird, sfMusic *main_music);
 
 //bird.c :
 void place_bird(window_s *window, bird_s *bird);

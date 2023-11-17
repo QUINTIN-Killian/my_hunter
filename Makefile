@@ -10,13 +10,15 @@ SRC	=	$(wildcard *.c)
 
 BIN_NAME	=	my_hunter
 
+FLAGS	=	-lcsfml-graphics -lcsfml-system -lcsfml-audio -lcsfml-window -g3
+
 all:	compile_lib compile
 
 compile_lib:
 	make re -C lib/my
 
 compile:	$(OBJ)
-	gcc -g3 $(SRC) -L. -lmy -lcsfml-graphics -lcsfml-system -o $(BIN_NAME)
+	gcc $(SRC) -L. -lmy $(FLAGS) -o $(BIN_NAME)
 
 clean:
 	rm -f $(OBJ)

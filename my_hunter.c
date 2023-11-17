@@ -30,6 +30,7 @@ void main_loop(bird_s *bird, window_s *window, sfIntRect *rect)
 {
     sfClock *clock = sfClock_create();
     background_s background;
+    sfMusic *main_music = generate_main_music();
 
     init_background(&background);
     while (sfRenderWindow_isOpen(window->window_info)) {
@@ -37,9 +38,10 @@ void main_loop(bird_s *bird, window_s *window, sfIntRect *rect)
         sfRenderWindow_drawSprite(window->window_info,
         background.background_sprite, NULL);
         sfSprite_setTextureRect(bird->bird_sprite, *rect);
-        get_event(window->window_info);
         bird_loop(clock, bird, window, rect);
+        get_event(window, bird, main_music);
     }
     sfSprite_destroy(background.background_sprite);
     sfSprite_destroy(bird->bird_sprite);
+    sfMusic_destroy(main_music);
 }

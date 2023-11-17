@@ -11,6 +11,10 @@
 #include <SFML/Window.h>
 #include <SFML/System.h>
 #include <SFML/Audio.h>
+#include <SFML/System/Clock.h>
+#include <SFML/System/Export.h>
+#include <SFML/System/Time.h>
+#include <SFML/System/Types.h>
 
 typedef struct window {
     sfRenderWindow *window_info;
@@ -21,6 +25,8 @@ typedef struct window {
 
 typedef struct bird {
     int dir;
+    int coef;
+    float velocity;
     sfTexture *bird_texture;
     sfSprite * bird_sprite;
     sfVector2f bird_pos;
@@ -31,14 +37,17 @@ typedef struct bird {
 
 //init.c :
 void init_window(window_s *window);
-void init_bird(bird_s *bird, window_s *window);
+void init_bird(bird_s *bird, window_s *window, int coef);
 void init_rect(sfIntRect *rect);
 
 //my_hunter.c :
-void window_opening(bird_s *bird, window_s *window, sfIntRect *rect);
+void main_loop(bird_s *bird, window_s *window, sfIntRect *rect);
 
 //my_functions.c :
 int my_randomizer(int nb);
+
+//background.c :
+void generate_main_theme_background(window_s *window);
 
 //events.c :
 void get_event(sfRenderWindow *window);

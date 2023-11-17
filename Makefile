@@ -16,7 +16,7 @@ compile_lib:
 	make re -C lib/my
 
 compile:	$(OBJ)
-	gcc $(SRC) -L. -lmy -lcsfml-graphics -o $(BIN_NAME)
+	gcc $(SRC) -L. -lmy -lcsfml-graphics -lcsfml-system -o $(BIN_NAME)
 
 clean:
 	rm -f $(OBJ)

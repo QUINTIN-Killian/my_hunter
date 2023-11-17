@@ -18,8 +18,13 @@ void place_bird(window_s *window, bird_s *bird)
 
 void move_bird(window_s *window, bird_s *bird)
 {
-    if (bird->bird_pos.x >= window->window_size.x)
-        init_bird(bird, window);
-    else
-        bird->bird_pos.x += 20;
+    if (bird->bird_pos.x >= window->window_size.x) {
+        if (bird->coef <= 48) {
+            init_bird(bird, window, bird->coef + 2);
+        } else {
+            init_bird(bird, window, bird->coef);
+        }
+    } else {
+        bird->bird_pos.x += 10;
+    }
 }

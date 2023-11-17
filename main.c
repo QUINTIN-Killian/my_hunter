@@ -21,8 +21,8 @@ int main(int ac, char **av)
     sfIntRect rect;
 
     init_window(&window);
-    init_bird(&bird, &window);
+    init_bird(&bird, &window, 5);
     init_rect(&rect);
-    window_opening(&bird, &window, &rect);
+    main_loop(&bird, &window, &rect);
     return 0;
 }

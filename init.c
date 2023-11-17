@@ -13,16 +13,18 @@ void init_window(window_s *window)
 {
     window->video_mode.height = 600;
     window->video_mode.width = 800;
-    window->video_mode.bitsPerPixel = 32;
+    window->video_mode.bitsPerPixel = 64;
     window->window_name = "Game - HUNTER";
     window->window_info = sfRenderWindow_create(window->video_mode,
     window->window_name, sfClose, NULL);
     window->window_size = sfRenderWindow_getSize(window->window_info);
 }
 
-void init_bird(bird_s *bird, window_s *window)
+void init_bird(bird_s *bird, window_s *window, int coef)
 {
     bird->dir = 1;
+    bird->coef = coef;
+    bird->velocity = 10 + my_randomizer(bird->coef);
     bird->bird_texture = sfTexture_createFromFile("images/bird.png", NULL);
     bird->bird_sprite = sfSprite_create();
     bird->bird_pos.x = -50;

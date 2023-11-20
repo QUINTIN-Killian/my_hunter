@@ -16,6 +16,12 @@
 #include <SFML/System/Time.h>
 #include <SFML/System/Types.h>
 
+typedef struct audio {
+    sfMusic *main_music;
+    sfSound *gun_shot;
+    sfSound *duck_noise;
+} audio_s;
+
 typedef struct background {
     sfTexture *background_texture;
     sfSprite *background_sprite;
@@ -39,13 +45,16 @@ typedef struct bird {
     #define MY_HUNTER_H_
 
 //init.c :
+void init_audio(audio_s *audio);
 void init_background(background_s *background);
 void init_window(window_s *window);
 void init_bird(bird_s *bird, window_s *window);
 void init_rect(sfIntRect *rect);
 
-//sound.c :
+//music.c :
 sfMusic *generate_main_music(void);
+void gun_shot(audio_s *audio);
+void duck_noise(audio_s *audio);
 
 //my_hunter.c :
 void main_loop(bird_s *bird, window_s *window, sfIntRect *rect);
@@ -54,7 +63,7 @@ void main_loop(bird_s *bird, window_s *window, sfIntRect *rect);
 int my_randomizer(int nb);
 
 //events.c :
-void get_event(window_s *window, bird_s *bird, sfMusic *main_music);
+void get_event(window_s *window, bird_s *bird, audio_s *audio);
 
 //bird.c :
 void place_bird(window_s *window, bird_s *bird);

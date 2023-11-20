@@ -45,6 +45,22 @@ static void sound(sfEvent *event, sfMusic *main_music)
     }
 }
 
+static void volume(sfEvent *event, sfMusic *main_music)
+{
+    if (event->type == sfEvtKeyPressed &&
+    sfKeyboard_isKeyPressed(sfKeyUp)) {
+        if (sfMusic_getVolume(main_music) < 100)
+            sfMusic_setVolume(main_music, sfMusic_getVolume(main_music) + 5);
+        return;
+    }
+    if (event->type == sfEvtKeyPressed &&
+    sfKeyboard_isKeyPressed(sfKeyDown)) {
+        if (sfMusic_getVolume(main_music) > 0)
+            sfMusic_setVolume(main_music, sfMusic_getVolume(main_music) - 5);
+        return;
+    }
+}
+
 void get_event(window_s *window, bird_s *bird, sfMusic *main_music)
 {
     sfEvent event;
@@ -53,5 +69,6 @@ void get_event(window_s *window, bird_s *bird, sfMusic *main_music)
         close_window(&event, window);
         mouse_click(&event, window, bird);
         sound(&event, main_music);
+        volume(&event, main_music);
     }
 }

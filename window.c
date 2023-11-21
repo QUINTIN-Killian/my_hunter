@@ -12,6 +12,7 @@
 void init_window(window_s *window)
 {
     window->score = 0;
+    window->velocity = 0.1;
     window->video_mode.height = 600;
     window->video_mode.width = 800;
     window->video_mode.bitsPerPixel = 64;

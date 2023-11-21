@@ -7,10 +7,20 @@
 */
 /*
 NOTES :
-    - gérer vélocité oiseaux
+    - gérer vélocité oiseaux (changer timer bird_loop() de 0.1s)
+        - 3 premiers = vélocité de 0.1
+        - 10 suivants = vélocité de 0.01 et il peut y
+        en avoir plusieurs (max 2)
+        - 7 suivants = vélocité de 0.005 et il peut y
+        en avoir plsuieurs (max 3)
+    - gérer fin de game
+        - 3 vies (difficulté normal)
+        - 1 vie (difficulté hard)
+    - faire que les touches <- et -> permettent de changer la musique
     - faire spawn oiseaux des deux cotés
     - faire apparaître plusieurs oiseaux
     - changer curseur in game
+    - easter egg changement de langue
 */
 
 #include "include/my.h"

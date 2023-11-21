@@ -9,15 +9,32 @@
 #include "include/my_hunter.h"
 #include "include/my.h"
 
+static void change_velocity(window_s *window)
+{
+    if (window->score == 3)
+        window->velocity = 0.04;
+    if (window->score == 4)
+        window->velocity = 0.01;
+    if (window->score == 13)
+        window->velocity = 0.0085;
+    if (window->score == 14)
+        window->velocity = 0.0075;
+    if (window->score == 20)
+        window->velocity = 0.007;
+    if (window->score == 21)
+        window->velocity = 0.005;
+}
+
 static void bird_loop(sfClock *clock, bird_s *bird,
     window_s *window, sfIntRect *rect)
 {
     sfTime time;
     float seconds;
 
+    change_velocity(window);
     time = sfClock_getElapsedTime(clock);
     seconds = time.microseconds / 1000000.0;
-    if (seconds > 0.1) {
+    if (seconds > window->velocity) {
         move_rect(rect, bird, 3, 330);
         place_bird(window, bird);
         move_bird(window, bird);

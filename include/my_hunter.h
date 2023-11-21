@@ -29,6 +29,7 @@ typedef struct background {
 
 typedef struct window {
     int score;
+    float velocity;
     sfRenderWindow *window_info;
     sfVector2u window_size;
     sfVideoMode video_mode;

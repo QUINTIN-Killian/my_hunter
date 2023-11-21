@@ -13,8 +13,8 @@ void destroy_all(background_s *background, score_s *score,
     bird_s *bird, audio_s *audio)
 {
     sfSprite_destroy(background->background_sprite);
-    sfSprite_destroy(bird->bird_sprite);
     sfTexture_destroy(background->background_texture);
+    sfSprite_destroy(bird->bird_sprite);
     sfTexture_destroy(bird->bird_texture);
     sfMusic_destroy(audio->main_music);
     sfSound_destroy(audio->gun_shot);

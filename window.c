@@ -11,6 +11,7 @@
 
 void init_window(window_s *window)
 {
+    window->game_status = 1;
     window->score = 0;
     window->velocity = 0.1;
     window->video_mode.height = 600;

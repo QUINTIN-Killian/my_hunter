@@ -53,7 +53,7 @@ void main_loop(bird_s *bird, window_s *window, sfIntRect *rect)
     init_background(&background);
     init_audio(&audio);
     init_score(&score);
-    while (sfRenderWindow_isOpen(window->window_info)) {
+    while (sfRenderWindow_isOpen(window->window_info) && window->game_status) {
         sfRenderWindow_clear(window->window_info, sfBlack);
         sfRenderWindow_drawSprite(window->window_info,
         background.background_sprite, NULL);

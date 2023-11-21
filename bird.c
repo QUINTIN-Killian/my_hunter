@@ -26,8 +26,8 @@ void place_bird(window_s *window, bird_s *bird)
 
 void move_bird(window_s *window, bird_s *bird)
 {
-    if (bird->bird_pos.x >= window->window_size.x) {
-        init_bird(bird, window);
+    if (bird->bird_pos.x >= window->window_size.x + 50) {
+        window->game_status = 0;
     } else {
         bird->bird_pos.x += 10;
     }

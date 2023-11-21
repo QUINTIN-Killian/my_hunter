@@ -28,6 +28,7 @@ typedef struct background {
 } background_s;
 
 typedef struct window {
+    int game_status;
     int score;
     float velocity;
     sfRenderWindow *window_info;

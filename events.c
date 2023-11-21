@@ -73,14 +73,15 @@ static void volume(sfEvent *event, audio_s *audio)
     }
 }
 
-void get_event(window_s *window, bird_s *bird, audio_s *audio)
+void get_event(window_s *window, bird_s *bird_tab, audio_s *audio)
 {
     sfEvent event;
 
     while (sfRenderWindow_pollEvent(window->window_info, &event)) {
         close_window(&event, window);
-        mouse_click(&event, window, bird, audio);
         sound(&event, audio);
         volume(&event, audio);
+        for (int i = 0; i < 2; i++)
+            mouse_click(&event, window, &bird_tab[i], audio);
     }
 }

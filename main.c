@@ -29,14 +29,15 @@ NOTES :
 int main(int ac, char **av)
 {
     window_s window;
-    bird_s bird;
+    bird_s *bird_tab = malloc(sizeof(bird_s) * 10);
     sfIntRect rect;
 
+    srand(time(NULL));
     init_window(&window);
-    bird.bird_texture = sfTexture_createFromFile("images/bird.png", NULL);
-    bird.bird_sprite = sfSprite_create();
-    init_bird(&bird, &window);
     init_rect(&rect);
-    main_loop(&bird, &window, &rect);
+    for (int i = 0; i < 2; i++)
+        first_init_bird(&bird_tab[i], &window, &rect, i + 1);
+    main_loop(bird_tab, &window, &rect);
+    free(bird_tab);
     return 0;
 }

@@ -38,6 +38,7 @@ typedef struct window {
 } window_s;
 
 typedef struct bird {
+    sfClock *clock;
     int dir;
     sfTexture *bird_texture;
     sfSprite *bird_sprite;
@@ -66,13 +67,14 @@ void init_background(background_s *background);
 void init_window(window_s *window);
 
 //bird.c :
+void first_init_bird(bird_s *bird, window_s *window, sfIntRect *rect, int i);
 void init_bird(bird_s *bird, window_s *window);
 void place_bird(window_s *window, bird_s *bird);
 void move_bird(window_s *window, bird_s *bird);
 
 //rect.c :
 void init_rect(sfIntRect *rect);
-void move_rect(sfIntRect *rect, bird_s *bird, int offset, int max_value);
+void move_rect(sfIntRect *rect, bird_s *bird);
 
 //score.c :
 void init_score(score_s *score);

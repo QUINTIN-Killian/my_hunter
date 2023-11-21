@@ -9,43 +9,34 @@
 #include "include/my_hunter.h"
 #include "include/my.h"
 
-static void change_velocity(window_s *window)
+static float get_velocity(window_s *window)
 {
-    if (window->score == 3)
-        window->velocity = 0.04;
-    if (window->score == 4)
-        window->velocity = 0.01;
-    if (window->score == 13)
-        window->velocity = 0.0085;
-    if (window->score == 14)
-        window->velocity = 0.0075;
-    if (window->score == 20)
-        window->velocity = 0.007;
-    if (window->score == 21)
-        window->velocity = 0.005;
+    if (window->score < 30)
+        return 0.1 - 0.01 * (window->score / 3);
+    else
+        return 0.01;
 }
 
-static void bird_loop(sfClock *clock, bird_s *bird,
+static void bird_loop(bird_s *bird_tab,
     window_s *window, sfIntRect *rect)
 {
     sfTime time;
     float seconds;
 
-    change_velocity(window);
-    time = sfClock_getElapsedTime(clock);
-    seconds = time.microseconds / 1000000.0;
-    if (seconds > window->velocity) {
-        move_rect(rect, bird, 3, 330);
-        place_bird(window, bird);
-        move_bird(window, bird);
-        sfRenderWindow_display(window->window_info);
-        sfClock_restart(clock);
+    for (int i = 0; i < 2; i++) {
+        time = sfClock_getElapsedTime(bird_tab[i].clock);
+        seconds = time.microseconds / 1000000.0;
+        if (seconds > get_velocity(window)) {
+            move_rect(rect, &bird_tab[i]);
+            move_bird(window, &bird_tab[i]);
+            sfClock_restart(bird_tab[i].clock);
+        }
+        place_bird(window, &bird_tab[i]);
     }
 }
 
-void main_loop(bird_s *bird, window_s *window, sfIntRect *rect)
+void main_loop(bird_s *bird_tab, window_s *window, sfIntRect *rect)
 {
-    sfClock *clock = sfClock_create();
     background_s background;
     audio_s audio;
     score_s score;
@@ -58,9 +49,9 @@ void main_loop(bird_s *bird, window_s *window, sfIntRect *rect)
         sfRenderWindow_drawSprite(window->window_info,
         background.background_sprite, NULL);
         print_score(&score, window);
-        sfSprite_setTextureRect(bird->bird_sprite, *rect);
-        bird_loop(clock, bird, window, rect);
-        get_event(window, bird, &audio);
+        bird_loop(bird_tab, window, rect);
+        get_event(window, bird_tab, &audio);
+        sfRenderWindow_display(window->window_info);
     }
-    destroy_all(&background, &score, bird, &audio);
+    destroy_all(&background, &score, bird_tab, &audio);
 }

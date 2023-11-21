@@ -17,17 +17,10 @@ void init_rect(sfIntRect *rect)
     rect->height = 110;
 }
 
-void move_rect(sfIntRect *rect, bird_s *bird, int offset, int max_value)
+void move_rect(sfIntRect *rect, bird_s *bird)
 {
-    if (bird->dir) {
-        rect->left = rect->left + max_value / offset;
-        if (rect->left >= max_value) {
-            bird->dir = 0;
-            rect->left = rect->left - (max_value / offset * 2);
-        }
-    } else {
-        rect->left = rect->left - max_value / offset;
-        if (rect->left == 0)
-            bird->dir = 1;
-    }
+    rect->left = rect->left + 110;
+    if (rect->left >= 330)
+        rect->left = 0;
+    sfSprite_setTextureRect(bird->bird_sprite, *rect);
 }

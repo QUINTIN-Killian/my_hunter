@@ -11,7 +11,6 @@
 
 int my_randomizer(int nb)
 {
-    srand(time(NULL));
     return (rand() % nb + 1);
 }
 

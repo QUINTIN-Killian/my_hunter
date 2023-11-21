@@ -11,10 +11,14 @@
 
 static float get_velocity(window_s *window)
 {
-    if (window->score < 30)
-        return 0.1 - 0.01 * (window->score / 3);
-    else
-        return 0.01;
+    float ans;
+
+    if (window->score < 27) {
+        ans = 0.1 - 0.01 * (window->score / 3);
+    } else {
+        ans = 0.02;
+    }
+    return ans;
 }
 
 static void bird_loop(bird_s *bird_tab,

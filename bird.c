@@ -9,6 +9,14 @@
 #include "include/my.h"
 #include "include/my_hunter.h"
 
+void init_bird(bird_s *bird, window_s *window)
+{
+    bird->dir = 1;
+    bird->bird_pos.x = -100;
+    bird->bird_pos.y = my_randomizer(
+    sfRenderWindow_getSize(window->window_info).y - 110);
+}
+
 void place_bird(window_s *window, bird_s *bird)
 {
     sfSprite_setPosition(bird->bird_sprite, bird->bird_pos);

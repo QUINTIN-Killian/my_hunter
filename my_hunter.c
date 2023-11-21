@@ -31,20 +31,19 @@ void main_loop(bird_s *bird, window_s *window, sfIntRect *rect)
     sfClock *clock = sfClock_create();
     background_s background;
     audio_s audio;
+    score_s score;
 
     init_background(&background);
     init_audio(&audio);
+    init_score(&score);
     while (sfRenderWindow_isOpen(window->window_info)) {
         sfRenderWindow_clear(window->window_info, sfBlack);
         sfRenderWindow_drawSprite(window->window_info,
         background.background_sprite, NULL);
+        print_score(&score, window);
         sfSprite_setTextureRect(bird->bird_sprite, *rect);
         bird_loop(clock, bird, window, rect);
         get_event(window, bird, &audio);
     }
-    sfSprite_destroy(background.background_sprite);
-    sfSprite_destroy(bird->bird_sprite);
-    sfMusic_destroy(audio.main_music);
-    sfSound_destroy(audio.gun_shot);
-    sfSound_destroy(audio.duck_noise);
+    destroy_all(&background, &score, bird, &audio);
 }

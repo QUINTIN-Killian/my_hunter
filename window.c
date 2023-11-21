@@ -1,0 +1,22 @@
+/*
+** EPITECH PROJECT, 2023
+** MUL_my_hunter_
+** File description:
+** Manages the window.
+** window
+*/
+
+#include "include/my.h"
+#include "include/my_hunter.h"
+
+void init_window(window_s *window)
+{
+    window->score = 0;
+    window->video_mode.height = 600;
+    window->video_mode.width = 800;
+    window->video_mode.bitsPerPixel = 64;
+    window->window_name = "DUCK HUNT (created by Killian QUINTIN)";
+    window->window_info = sfRenderWindow_create(window->video_mode,
+    window->window_name, sfClose, NULL);
+    window->window_size = sfRenderWindow_getSize(window->window_info);
+}

@@ -9,6 +9,17 @@
 #include "include/my.h"
 #include "include/my_hunter.h"
 
+void init_audio(audio_s *audio)
+{
+    audio->gun_shot = sfSound_create();
+    audio->duck_noise = sfSound_create();
+    audio->main_music = generate_main_music();
+    sfSound_setBuffer(audio->gun_shot,
+    sfSoundBuffer_createFromFile("music/gun_shot.ogg"));
+    sfSound_setBuffer(audio->duck_noise,
+    sfSoundBuffer_createFromFile("music/duck_noise.wav"));
+}
+
 sfMusic *generate_main_music(void)
 {
     sfMusic *main_music = sfMusic_createFromFile("music/main_theme_music.wav");

@@ -29,6 +29,7 @@ static void mouse_click(sfEvent *event, window_s *window,
         mouse_pos.y <= bird->bird_pos.y + 110) {
             duck_noise(audio);
             init_bird(bird, window);
+            window->score++;
         }
     }
 }

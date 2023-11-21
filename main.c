@@ -5,10 +5,11 @@
 ** Main file.
 ** main
 */
-/*COMPILATION AVEC : 'gcc <files> -lcsfml-graphics'*/
 /*
 NOTES :
-    - sfTexture_destroy(bird->bird_texture);
+    - gérer vélocité oiseaux
+    - faire spawn oiseaux des deux cotés
+    - faire apparaître plusieurs oiseaux
 */
 
 #include "include/my.h"

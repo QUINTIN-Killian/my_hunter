@@ -10,6 +10,7 @@ NOTES :
     - gérer vélocité oiseaux
     - faire spawn oiseaux des deux cotés
     - faire apparaître plusieurs oiseaux
+    - changer curseur in game
 */
 
 #include "include/my.h"

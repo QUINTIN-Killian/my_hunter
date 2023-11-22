@@ -30,6 +30,7 @@ static void mouse_click(sfEvent *event, window_s *window,
             duck_noise(audio);
             init_bird(bird, window);
             window->score++;
+            change_nb_max_bird(window);
         }
     }
 }
@@ -81,7 +82,7 @@ void get_event(window_s *window, bird_s *bird_tab, audio_s *audio)
         close_window(&event, window);
         sound(&event, audio);
         volume(&event, audio);
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 3; i++)
             mouse_click(&event, window, &bird_tab[i], audio);
     }
 }

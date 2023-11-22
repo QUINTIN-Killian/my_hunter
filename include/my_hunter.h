@@ -28,6 +28,7 @@ typedef struct background {
 } background_s;
 
 typedef struct window {
+    int nb_max_bird;
     int game_status;
     int score;
     float velocity;
@@ -38,6 +39,7 @@ typedef struct window {
 } window_s;
 
 typedef struct bird {
+    sfIntRect *rect;
     sfClock *clock;
     int dir;
     sfTexture *bird_texture;
@@ -67,13 +69,13 @@ void init_background(background_s *background);
 void init_window(window_s *window);
 
 //bird.c :
-void first_init_bird(bird_s *bird, window_s *window, sfIntRect *rect, int i);
+void first_init_bird(bird_s *bird, window_s *window, int i);
 void init_bird(bird_s *bird, window_s *window);
 void place_bird(window_s *window, bird_s *bird);
 void move_bird(window_s *window, bird_s *bird);
 
 //rect.c :
-void init_rect(sfIntRect *rect);
+void init_rect(bird_s *bird);
 void move_rect(sfIntRect *rect, bird_s *bird);
 
 //score.c :
@@ -86,11 +88,12 @@ void gun_shot(audio_s *audio);
 void duck_noise(audio_s *audio);
 
 //my_hunter.c :
-void main_loop(bird_s *bird, window_s *window, sfIntRect *rect);
+void main_loop(bird_s *bird, window_s *window);
 
 //my_functions.c :
 int my_randomizer(int nb);
 char *convert_int_to_str(int nbr);
+void change_nb_max_bird(window_s *window);
 
 //events.c :
 void get_event(window_s *window, bird_s *bird, audio_s *audio);

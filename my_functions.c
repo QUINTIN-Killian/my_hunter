@@ -29,3 +29,15 @@ char *convert_int_to_str(int nbr)
     str[intlen] = '\0';
     return str;
 }
+
+void change_nb_max_bird(window_s *window)
+{
+    if (window->score == 5) {
+        window->nb_max_bird = window->nb_max_bird + 1;
+        return;
+    }
+    if (window->score == 14) {
+        window->nb_max_bird = window->nb_max_bird + 1;
+        return;
+    }
+}

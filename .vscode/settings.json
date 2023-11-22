@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "my_hunter.h": "c"
+        "my_hunter.h": "c",
+        "my.h": "c"
     }
 }

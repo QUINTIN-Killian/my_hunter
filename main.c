@@ -25,18 +25,23 @@ NOTES :
 #include "include/my.h"
 #include "include/my_hunter.h"
 
+static void free_all(bird_s *bird_tab)
+{
+    for (int i = 0; i < 3; i++)
+        free(bird_tab[i].rect);
+    free(bird_tab);
+}
+
 int main(int ac, char **av)
 {
     window_s window;
-    bird_s *bird_tab = malloc(sizeof(bird_s) * 10);
-    sfIntRect rect;
+    bird_s *bird_tab = malloc(sizeof(bird_s) * 3);
 
     srand(time(NULL));
     init_window(&window);
-    init_rect(&rect);
-    for (int i = 0; i < 2; i++)
-        first_init_bird(&bird_tab[i], &window, &rect, i + 1);
-    main_loop(bird_tab, &window, &rect);
-    free(bird_tab);
+    for (int i = 0; i < 3; i++)
+        first_init_bird(&bird_tab[i], &window, i + 1);
+    main_loop(bird_tab, &window);
+    free_all(bird_tab);
     return 0;
 }

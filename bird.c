@@ -9,8 +9,9 @@
 #include "include/my.h"
 #include "include/my_hunter.h"
 
-void first_init_bird(bird_s *bird, window_s *window, sfIntRect *rect, int i)
+void first_init_bird(bird_s *bird, window_s *window, int i)
 {
+    init_rect(bird);
     bird->dir = my_randomizer(2);
     if (bird->dir == 1)
         bird->bird_texture =
@@ -19,7 +20,7 @@ void first_init_bird(bird_s *bird, window_s *window, sfIntRect *rect, int i)
         bird->bird_texture =
         sfTexture_createFromFile("images/bird_inv.png", NULL);
     bird->bird_sprite = sfSprite_create();
-    sfSprite_setTextureRect(bird->bird_sprite, *rect);
+    sfSprite_setTextureRect(bird->bird_sprite, *bird->rect);
     bird->clock = sfClock_create();
     if (bird->dir == 1)
         bird->bird_pos.x = my_randomizer(300) * (-1) - 100 * i;

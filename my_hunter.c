@@ -21,17 +21,16 @@ static float get_velocity(window_s *window)
     return ans;
 }
 
-static void bird_loop(bird_s *bird_tab,
-    window_s *window, sfIntRect *rect)
+static void bird_loop(bird_s *bird_tab, window_s *window)
 {
     sfTime time;
     float seconds;
 
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < window->nb_max_bird; i++) {
         time = sfClock_getElapsedTime(bird_tab[i].clock);
         seconds = time.microseconds / 1000000.0;
         if (seconds > get_velocity(window)) {
-            move_rect(rect, &bird_tab[i]);
+            move_rect(bird_tab[i].rect, &bird_tab[i]);
             move_bird(window, &bird_tab[i]);
             sfClock_restart(bird_tab[i].clock);
         }
@@ -39,7 +38,7 @@ static void bird_loop(bird_s *bird_tab,
     }
 }
 
-void main_loop(bird_s *bird_tab, window_s *window, sfIntRect *rect)
+void main_loop(bird_s *bird_tab, window_s *window)
 {
     background_s background;
     audio_s audio;
@@ -53,7 +52,7 @@ void main_loop(bird_s *bird_tab, window_s *window, sfIntRect *rect)
         sfRenderWindow_drawSprite(window->window_info,
         background.background_sprite, NULL);
         print_score(&score, window);
-        bird_loop(bird_tab, window, rect);
+        bird_loop(bird_tab, window);
         get_event(window, bird_tab, &audio);
         sfRenderWindow_display(window->window_info);
     }

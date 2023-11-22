@@ -11,6 +11,7 @@
 
 void init_window(window_s *window)
 {
+    window->nb_max_bird = 1;
     window->game_status = 1;
     window->score = 0;
     window->velocity = 0.1;

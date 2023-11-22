@@ -9,12 +9,13 @@
 #include "include/my.h"
 #include "include/my_hunter.h"
 
-void init_rect(sfIntRect *rect)
+void init_rect(bird_s *bird)
 {
-    rect->top = 0;
-    rect->left = 0;
-    rect->width = 110;
-    rect->height = 110;
+    bird->rect = malloc(sizeof(sfIntRect));
+    bird->rect->top = 0;
+    bird->rect->left = 0;
+    bird->rect->width = 110;
+    bird->rect->height = 110;
 }
 
 void move_rect(sfIntRect *rect, bird_s *bird)

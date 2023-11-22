@@ -7,12 +7,6 @@
 */
 /*
 NOTES :
-    - gérer vélocité oiseaux (changer timer bird_loop() de 0.1s)
-        - 3 premiers = vélocité de 0.1
-        - 10 suivants = vélocité de 0.01 et il peut y
-        en avoir plusieurs (max 2)
-        - 7 suivants = vélocité de 0.005 et il peut y
-        en avoir plusieurs (max 3)
     - gérer fin de game
         - 3 vies (difficulté normal)
         - 1 vie (difficulté hard)
@@ -32,11 +26,27 @@ static void free_all(bird_s *bird_tab)
     free(bird_tab);
 }
 
+static void help(void)
+{
+    my_putstr("\nWelcome in the Duck Hunt video game !\n\n");
+    my_putstr("Rules :\n");
+    my_putstr("    Your goal is to shoot ducks passing on your screen.\n");
+    my_putstr("    The furthest you go in the game, ");
+    my_putstr("the fastest and the most the ducks are.\n");
+    my_putstr("Inputs :\n");
+    my_putstr("    './my_hunter -h' to get help.\n");
+    my_putstr("Game created by Killian QUINTIN.\n");
+}
+
 int main(int ac, char **av)
 {
     window_s window;
     bird_s *bird_tab = malloc(sizeof(bird_s) * 3);
 
+    if (ac > 1 && my_strcmp(av[1], "-h") == 0) {
+        help();
+        return 0;
+    }
     srand(time(NULL));
     init_window(&window);
     for (int i = 0; i < 3; i++)

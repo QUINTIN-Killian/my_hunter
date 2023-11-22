@@ -13,10 +13,10 @@ static float get_velocity(window_s *window)
 {
     float ans;
 
-    if (window->score < 27) {
+    if (window->score < 24) {
         ans = 0.1 - 0.01 * (window->score / 3);
     } else {
-        ans = 0.02;
+        ans = 0.025;
     }
     return ans;
 }

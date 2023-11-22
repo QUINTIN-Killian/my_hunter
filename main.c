@@ -33,6 +33,7 @@ static void help(void)
     my_putstr("    Your goal is to shoot ducks passing on your screen.\n");
     my_putstr("    The furthest you go in the game, ");
     my_putstr("the fastest and the most the ducks are.\n");
+    my_putstr("You will lose if you let a duck cross the screen.\n");
     my_putstr("Inputs :\n");
     my_putstr("    './my_hunter -h' to get help.\n");
     my_putstr("Game created by Killian QUINTIN.\n");

@@ -35,7 +35,7 @@ static void mouse_click(sfEvent *event, window_s *window,
     }
 }
 
-static void sound(sfEvent *event, audio_s *audio)
+void sound(sfEvent *event, audio_s *audio)
 {
     if (event->type == sfEvtKeyPressed &&
     sfKeyboard_isKeyPressed(sfKeySpace)) {

@@ -122,6 +122,8 @@ char *convert_int_to_str(int nbr);
 void change_nb_max_bird(window_s *window);
 
 //events.c :
+void sound(sfEvent *event, audio_s *audio);
+void volume(sfEvent *event, audio_s *audio);
 void get_event(window_s *window, bird_s *bird, audio_s *audio);
 
 //destroy.c :

@@ -25,7 +25,7 @@ void init_start(display_start_s *display_start, window_s *window)
     sfText_setFont(display_start->launch_info,
     display_start->launch_info_font);
     sfText_setString(display_start->launch_info,
-    "Press 'space bar' to lauch the\ngame or 'escape' to leave !");
+    "Press 'enter' to lauch the\ngame or 'escape' to leave !");
     sfText_setPosition(display_start->launch_info,
     display_start->launch_info_pos);
 }

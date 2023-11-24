@@ -11,8 +11,7 @@
 
 static void leave_game(window_s *window, sfEvent event)
 {
-    if (sfRenderWindow_pollEvent(window->window_info, &event) &&
-    (sfKeyboard_isKeyPressed(sfKeyEscape) || event.type == sfEvtClosed)) {
+    if (sfKeyboard_isKeyPressed(sfKeyEscape) || event.type == sfEvtClosed) {
         sfRenderWindow_close(window->window_info);
     }
 }
@@ -20,8 +19,7 @@ static void leave_game(window_s *window, sfEvent event)
 static void lauch_game(window_s *window, bird_s *bird_tab,
     sfEvent event, audio_s *audio)
 {
-    if (sfRenderWindow_pollEvent(window->window_info, &event) &&
-    sfKeyboard_isKeyPressed(sfKeySpace)) {
+    if (sfKeyboard_isKeyPressed(sfKeyEnter)) {
         main_loop(bird_tab, window, audio);
     }
 }
@@ -66,6 +64,17 @@ static void bird_loop_start(bird_s *bird, window_s *window)
     place_bird(window, bird);
 }
 
+void get_start_event(window_s *window, bird_s *bird_tab,
+    audio_s *audio, sfEvent event)
+{
+    while (sfRenderWindow_pollEvent(window->window_info, &event)) {
+        leave_game(window, event);
+        lauch_game(window, bird_tab, event, audio);
+        sound(&event, audio);
+        volume(&event, audio);
+    }
+}
+
 void starting_screen_display(window_s *window, background_s  *background,
     display_start_s *display_start, bird_s *bird)
 {
@@ -94,8 +103,7 @@ void starting_screen(bird_s *bird_tab, window_s *window)
     while (sfRenderWindow_isOpen(window->window_info) && window->game_status) {
         sfRenderWindow_clear(window->window_info, sfBlack);
         starting_screen_display(window, &background, &display_start, &bird);
-        leave_game(window, event);
-        lauch_game(window, bird_tab, event, &audio);
+        get_start_event(window, bird_tab, &audio, event);
     }
     destroy_start(&background, &bird, &display_start);
 }

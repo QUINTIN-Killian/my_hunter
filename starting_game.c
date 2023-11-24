@@ -106,16 +106,16 @@ void starting_screen(bird_s *bird_tab, window_s *window)
     bird_s bird;
     audio_s audio;
 
-    init_audio(&audio);
-    init_bird_start(&bird, window);
-    init_start(&display_start, window);
     init_background(&background);
+    init_start(&display_start, window);
+    init_bird_start(&bird, window);
+    init_audio(&audio);
     while (sfRenderWindow_isOpen(window->window_info) && window->game_status) {
         sfRenderWindow_clear(window->window_info, sfBlack);
         starting_screen_display(window, &background, &display_start, &bird);
         get_start_event(window, &bird, &audio, event);
         if (window->start)
-            main_loop(bird_tab, window, &audio);
+            main_loop(&background, bird_tab, window, &audio);
     }
-    destroy_start(&background, &bird, &display_start);
+    destroy_start(&background, &display_start, &bird, &audio);
 }

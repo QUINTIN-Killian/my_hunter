@@ -17,6 +17,9 @@
 #include <SFML/System/Types.h>
 
 typedef struct audio {
+    sfSoundBuffer *gun_shot_buff;
+    sfSoundBuffer *duck_noise_buff;
+    sfSoundBuffer *buzzer_sound_buff;
     sfMusic *main_music;
     sfSound *gun_shot;
     sfSound *duck_noise;
@@ -116,7 +119,8 @@ void print_lives(window_s *window, heart_s *heart_tab);
 void starting_screen(bird_s *bird_tab, window_s *window);
 
 //my_hunter.c :
-void main_loop(bird_s *bird_tab, window_s *window, audio_s *audio);
+void main_loop(background_s *background, bird_s *bird_tab,
+    window_s *window, audio_s *audio);
 
 //my_functions.c :
 int my_randomizer(int nb);
@@ -129,10 +133,9 @@ void volume(sfEvent *event, audio_s *audio);
 void get_event(window_s *window, bird_s *bird, audio_s *audio);
 
 //destroy.c :
-void destroy_heart(heart_s *heart_tab);
-void destroy_start(background_s *background, bird_s *bird,
-    display_start_s *display_start);
-void destroy_all(background_s *background, score_s *score,
+void destroy_main(window_s *window, bird_s *bird_tab);
+void destroy_start(background_s *background, display_start_s *display_start,
     bird_s *bird, audio_s *audio);
+void destroy_game(score_s *score, heart_s *heart_tab);
 
 #endif

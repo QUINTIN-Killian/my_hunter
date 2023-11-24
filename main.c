@@ -10,8 +10,9 @@ NOTES :
     - gérer fin de game
         - 3 vies (difficulté normal)
         - 1 vie (difficulté hard)
-    - enregistrer scores dans un fichier txt caché
     - fix taille du fichier de la musique principale
+    - VALGRIND !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    - enregistrer scores dans un fichier txt caché
     - faire que les touches <- et -> permettent de changer la musique
     - changer curseur in game
     - easter egg changement de langue
@@ -19,13 +20,6 @@ NOTES :
 
 #include "include/my.h"
 #include "include/my_hunter.h"
-
-static void free_all(bird_s *bird_tab)
-{
-    for (int i = 0; i < 3; i++)
-        free(bird_tab[i].rect);
-    free(bird_tab);
-}
 
 static void help(void)
 {
@@ -54,6 +48,6 @@ int main(int ac, char **av)
     for (int i = 0; i < 3; i++)
         first_init_bird(&bird_tab[i], &window, i + 1);
     starting_screen(bird_tab, &window);
-    free_all(bird_tab);
+    destroy_main(&window, bird_tab);
     return 0;
 }

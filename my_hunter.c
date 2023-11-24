@@ -55,20 +55,17 @@ static void main_loop2(window_s *window, bird_s *bird_tab, audio_s *audio)
     sfRenderWindow_display(window->window_info);
 }
 
-void main_loop(bird_s *bird_tab, window_s *window, audio_s *audio)
+void main_loop(background_s *background, bird_s *bird_tab,
+    window_s *window, audio_s *audio)
 {
-    background_s background;
     score_s score;
     heart_s *heart_tab = malloc(sizeof(heart_s) * 3);
 
-    init_background(&background);
     init_score(&score);
     init_heart(heart_tab, window);
     while (sfRenderWindow_isOpen(window->window_info) && window->game_status) {
-        main_loop1(window, &background, heart_tab, &score);
+        main_loop1(window, background, heart_tab, &score);
         main_loop2(window, bird_tab, audio);
     }
-    destroy_all(&background, &score, bird_tab, audio);
-    destroy_heart(heart_tab);
-    free(heart_tab);
+    destroy_game(&score, heart_tab);
 }

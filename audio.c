@@ -11,16 +11,18 @@
 
 void init_audio(audio_s *audio)
 {
+    audio->gun_shot_buff = sfSoundBuffer_createFromFile("music/gun_shot.ogg");
+    audio->duck_noise_buff =
+    sfSoundBuffer_createFromFile("music/duck_noise.wav");
+    audio->buzzer_sound_buff =
+    sfSoundBuffer_createFromFile("music/buzzer_sound.ogg");
     audio->gun_shot = sfSound_create();
     audio->duck_noise = sfSound_create();
     audio->buzzer_sound = sfSound_create();
     audio->main_music = generate_main_music();
-    sfSound_setBuffer(audio->gun_shot,
-    sfSoundBuffer_createFromFile("music/gun_shot.ogg"));
-    sfSound_setBuffer(audio->duck_noise,
-    sfSoundBuffer_createFromFile("music/duck_noise.wav"));
-    sfSound_setBuffer(audio->buzzer_sound,
-    sfSoundBuffer_createFromFile("music/buzzer_sound.ogg"));
+    sfSound_setBuffer(audio->gun_shot, audio->gun_shot_buff);
+    sfSound_setBuffer(audio->duck_noise, audio->duck_noise_buff);
+    sfSound_setBuffer(audio->buzzer_sound, audio->buzzer_sound_buff);
 }
 
 sfMusic *generate_main_music(void)

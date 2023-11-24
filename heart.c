@@ -13,7 +13,7 @@ void init_heart(heart_s *heart_tab, window_s *window)
 {
     sfVector2u window_size = sfRenderWindow_getSize(window->window_info);
 
-    for (int i; i < window->lives; i++) {
+    for (int i = 0; i < window->lives; i++) {
         heart_tab[i].heart_scale.x = 0.05;
         heart_tab[i].heart_scale.y = 0.05;
         heart_tab[i].heart_pos.x = window_size.x - 30 - i * 30;

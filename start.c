@@ -9,23 +9,34 @@
 #include "include/my.h"
 #include "include/my_hunter.h"
 
-void init_start(display_start_s *display_start, window_s *window)
+static void set_start(display_start_s *display_start)
 {
-    display_start->game_name = sfText_create();
-    display_start->game_name_font = sfFont_createFromFile("font/impact.ttf");
-    display_start->launch_info = sfText_create();
-    display_start->launch_info_font = sfFont_createFromFile("font/impact.ttf");
-    display_start->launch_info_pos = (sfVector2f){0,
-    window->window_size.y / 2 - window->window_size.y / 8};
-    sfText_setFillColor(display_start->game_name, sfYellow);
+    sfText_setFillColor(display_start->game_name, sfMagenta);
     sfText_setFont(display_start->game_name, display_start->game_name_font);
     sfText_setString(display_start->game_name, "Duck Hunt");
-    sfText_setScale(display_start->game_name, (sfVector2f){2.0, 2.0});
+    sfText_setScale(display_start->game_name, (sfVector2f){3.0, 3.0});
     sfText_setFillColor(display_start->launch_info, sfWhite);
     sfText_setFont(display_start->launch_info,
     display_start->launch_info_font);
     sfText_setString(display_start->launch_info,
-    "Press 'enter' to lauch the\ngame or 'escape' to leave !");
+    "Shoot the bird to start\nor press 'escape' to leave !");
+    sfText_setPosition(display_start->game_name,
+    display_start->game_name_pos);
     sfText_setPosition(display_start->launch_info,
     display_start->launch_info_pos);
+}
+
+void init_start(display_start_s *display_start, window_s *window)
+{
+    display_start->game_name = sfText_create();
+    display_start->game_name_font = sfFont_createFromFile("font/impact.ttf");
+    display_start->game_name_pos = (sfVector2f)
+    {my_randomizer(window->window_size.x - 300),
+    my_randomizer(window->window_size.y - 100)};
+    display_start->launch_info = sfText_create();
+    display_start->launch_info_font = sfFont_createFromFile("font/impact.ttf");
+    display_start->launch_info_pos = (sfVector2f)
+    {my_randomizer(window->window_size.x - 300),
+    my_randomizer(window->window_size.y - 100)};
+    set_start(display_start);
 }

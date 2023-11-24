@@ -10,6 +10,7 @@ NOTES :
     - gérer fin de game
         - 3 vies (difficulté normal)
         - 1 vie (difficulté hard)
+    - enregistrer scores dans un fichier txt caché
     - fix taille du fichier de la musique principale
     - faire que les touches <- et -> permettent de changer la musique
     - changer curseur in game

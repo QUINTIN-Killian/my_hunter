@@ -29,6 +29,7 @@ typedef struct background {
 } background_s;
 
 typedef struct window {
+    int start;
     int lives;
     int nb_max_bird;
     int game_status;
@@ -68,6 +69,7 @@ typedef struct heart {
 typedef struct display_start {
     sfText *game_name;
     sfFont *game_name_font;
+    sfVector2f game_name_pos;
     sfText *launch_info;
     sfFont *launch_info_font;
     sfVector2f launch_info_pos;

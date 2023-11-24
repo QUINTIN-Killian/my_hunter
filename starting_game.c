@@ -16,14 +16,6 @@ static void leave_game(window_s *window, sfEvent event)
     }
 }
 
-static void lauch_game(window_s *window, bird_s *bird_tab,
-    sfEvent event, audio_s *audio)
-{
-    if (sfKeyboard_isKeyPressed(sfKeyEnter)) {
-        main_loop(bird_tab, window, audio);
-    }
-}
-
 static void init_bird_start(bird_s *bird, window_s *window)
 {
     init_rect(bird);
@@ -64,14 +56,32 @@ static void bird_loop_start(bird_s *bird, window_s *window)
     place_bird(window, bird);
 }
 
-void get_start_event(window_s *window, bird_s *bird_tab,
+void kill_start_bird(sfEvent *event, window_s *window,
+    audio_s *audio, bird_s *bird)
+{
+    sfVector2i mouse_pos;
+
+    if (event->type == sfEvtMouseButtonPressed) {
+        mouse_pos = sfMouse_getPositionRenderWindow(window->window_info);
+        gun_shot(audio);
+        if (mouse_pos.x >= bird->bird_pos.x &&
+        mouse_pos.x <= bird->bird_pos.x + 110 &&
+        mouse_pos.y >= bird->bird_pos.y &&
+        mouse_pos.y <= bird->bird_pos.y + 110) {
+            duck_noise(audio);
+            window->start = 1;
+        }
+    }
+}
+
+void get_start_event(window_s *window, bird_s *bird,
     audio_s *audio, sfEvent event)
 {
     while (sfRenderWindow_pollEvent(window->window_info, &event)) {
         leave_game(window, event);
-        lauch_game(window, bird_tab, event, audio);
         sound(&event, audio);
         volume(&event, audio);
+        kill_start_bird(&event, window, audio, bird);
     }
 }
 
@@ -103,7 +113,9 @@ void starting_screen(bird_s *bird_tab, window_s *window)
     while (sfRenderWindow_isOpen(window->window_info) && window->game_status) {
         sfRenderWindow_clear(window->window_info, sfBlack);
         starting_screen_display(window, &background, &display_start, &bird);
-        get_start_event(window, bird_tab, &audio, event);
+        get_start_event(window, &bird, &audio, event);
+        if (window->start)
+            main_loop(bird_tab, window, &audio);
     }
     destroy_start(&background, &bird, &display_start);
 }

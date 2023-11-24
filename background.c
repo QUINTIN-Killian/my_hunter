@@ -12,7 +12,7 @@
 void init_background(background_s *background)
 {
     background->background_texture =
-    sfTexture_createFromFile("images/my_hunter_background.jpg", NULL);
+    sfTexture_createFromFile("images/my_hunter_background2.jpg", NULL);
     background->background_sprite = sfSprite_create();
     sfSprite_setTexture(background->background_sprite,
     background->background_texture, sfFalse);

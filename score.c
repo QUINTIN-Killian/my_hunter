@@ -18,9 +18,9 @@ void init_score(score_s *score)
     score->n_score_pos.x = -100;
     score->n_score_pos.y = 0;
     sfText_setOrigin(score->n_score, score->n_score_pos);
-    sfText_setFillColor(score->score, sfYellow);
+    sfText_setFillColor(score->score, sfMagenta);
     sfText_setFont(score->score, score->score_font);
-    sfText_setFillColor(score->n_score, sfYellow);
+    sfText_setFillColor(score->n_score, sfMagenta);
     sfText_setFont(score->n_score, score->n_score_font);
 }
 

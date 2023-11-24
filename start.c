@@ -19,7 +19,7 @@ static void set_start(display_start_s *display_start)
     sfText_setFont(display_start->launch_info,
     display_start->launch_info_font);
     sfText_setString(display_start->launch_info,
-    "Shoot the bird to start\nor press 'escape' to leave !");
+    "Shoot the duck to start\nor press 'escape' to leave !");
     sfText_setPosition(display_start->game_name,
     display_start->game_name_pos);
     sfText_setPosition(display_start->launch_info,

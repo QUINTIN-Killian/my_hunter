@@ -69,18 +69,31 @@ void place_bird(window_s *window, bird_s *bird)
     sfRenderWindow_drawSprite(window->window_info, bird->bird_sprite, NULL);
 }
 
-void move_bird(window_s *window, bird_s *bird)
+static void move_bird_aux(bird_s *bird)
 {
-    if (bird->bird_pos.x >= window->window_size.x + 100 && bird->dir == 1) {
-        window->game_status = 0;
-        return;
-    }
-    if (bird->bird_pos.x <= 0 - 100 && bird->dir == 2) {
-        window->game_status = 0;
-        return;
-    }
     if (bird->dir == 1)
         bird->bird_pos.x += 10;
     else
         bird->bird_pos.x -= 10;
+}
+
+void move_bird(window_s *window, bird_s *bird, audio_s *audio)
+{
+    if (bird->bird_pos.x >= window->window_size.x + 120 && bird->dir == 1) {
+        window->lives--;
+        buzzer_sound(audio);
+        if (window->lives == 0)
+            window->game_status = 0;
+        init_bird(bird, window);
+        return;
+    }
+    if (bird->bird_pos.x <= 0 - 120 && bird->dir == 2) {
+        window->lives--;
+        buzzer_sound(audio);
+        if (window->lives == 0)
+            window->game_status = 0;
+        init_bird(bird, window);
+        return;
+    }
+    move_bird_aux(bird);
 }

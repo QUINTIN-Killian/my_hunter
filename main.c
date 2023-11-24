@@ -52,7 +52,7 @@ int main(int ac, char **av)
     init_window(&window);
     for (int i = 0; i < 3; i++)
         first_init_bird(&bird_tab[i], &window, i + 1);
-    main_loop(bird_tab, &window);
+    starting_screen(bird_tab, &window);
     free_all(bird_tab);
     return 0;
 }

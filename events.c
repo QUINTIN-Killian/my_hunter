@@ -50,7 +50,7 @@ static void sound(sfEvent *event, audio_s *audio)
     }
 }
 
-static void volume(sfEvent *event, audio_s *audio)
+static void volume_up(sfEvent *event, audio_s *audio)
 {
     if (event->type == sfEvtKeyPressed &&
     sfKeyboard_isKeyPressed(sfKeyUp)) {
@@ -60,8 +60,11 @@ static void volume(sfEvent *event, audio_s *audio)
         sfSound_getVolume(audio->gun_shot) + 5.0);
         sfSound_setVolume(audio->duck_noise,
         sfSound_getVolume(audio->duck_noise) + 5.0);
-        return;
     }
+}
+
+static void volume_down(sfEvent *event, audio_s *audio)
+{
     if (event->type == sfEvtKeyPressed &&
     sfKeyboard_isKeyPressed(sfKeyDown)) {
         sfMusic_setVolume(audio->main_music,
@@ -70,8 +73,13 @@ static void volume(sfEvent *event, audio_s *audio)
         sfSound_getVolume(audio->gun_shot) - 5.0);
         sfSound_setVolume(audio->duck_noise,
         sfSound_getVolume(audio->duck_noise) - 5.0);
-        return;
     }
+}
+
+void volume(sfEvent *event, audio_s *audio)
+{
+    volume_up(event, audio);
+    volume_down(event, audio);
 }
 
 void get_event(window_s *window, bird_s *bird_tab, audio_s *audio)

@@ -7,12 +7,11 @@
 */
 /*
 NOTES :
-    - fix taille du fichier de la musique principale
-    - VALGRIND !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     - enregistrer scores dans un fichier txt caché
-    - faire que les touches <- et -> permettent de changer la musique
+    - VALGRIND !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     - changer curseur in game
-    - easter egg changement de langue
+    BONUS :
+        - easter egg changement de langue
 */
 
 #include "include/my.h"

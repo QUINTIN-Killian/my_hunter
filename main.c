@@ -7,6 +7,7 @@
 */
 /*
 NOTES :
+    - afficher score à la fin
     - enregistrer scores dans un fichier txt caché
     - VALGRIND !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     - changer curseur in game

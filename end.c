@@ -33,7 +33,7 @@ void init_end(end_s *end, window_s *window)
     end->game_over_pos = (sfVector2f){100, 100};
     end->infos = sfText_create();
     end->infos_font = sfFont_createFromFile("font/impact.ttf");
-    end->infos_pos = (sfVector2f){window->window_size.x - 650,
+    end->infos_pos = (sfVector2f){window->window_size.x - 620,
     window->window_size.y - 30};
     set_end(end);
 }

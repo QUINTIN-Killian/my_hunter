@@ -1,0 +1,115 @@
+/*
+** EPITECH PROJECT, 2023
+** B-MUL-100-LYN-1-1-myhunter-killian.quintin
+** File description:
+** Displays the starting screen.
+** starting_game
+*/
+
+#include "include/my.h"
+#include "include/my_hunter.h"
+
+static void leave_game(window_s *window, sfEvent event)
+{
+    if (sfKeyboard_isKeyPressed(sfKeyEscape) || event.type == sfEvtClosed) {
+        sfRenderWindow_close(window->window_info);
+    }
+}
+
+static void init_bird_end(bird_s *bird, window_s *window)
+{
+    init_rect(bird);
+    bird->dir = 1;
+    bird->bird_texture =
+    sfTexture_createFromFile("images/bird.png", NULL);
+    bird->bird_sprite = sfSprite_create();
+    sfSprite_setTextureRect(bird->bird_sprite, *bird->rect);
+    bird->clock = sfClock_create();
+    bird->bird_pos = (sfVector2f){-130, window->window_size.y - 200};
+}
+
+static void move_bird_end(bird_s *bird, window_s *window)
+{
+    if (bird->bird_pos.x >= window->window_size.x + 120) {
+        bird->clock = sfClock_create();
+        bird->bird_pos = (sfVector2f){-130, window->window_size.y - 200};
+        return;
+    }
+    if (bird->dir == 1)
+        bird->bird_pos.x += 10;
+    else
+        bird->bird_pos.x -= 10;
+}
+
+static void bird_loop_end(bird_s *bird, window_s *window)
+{
+    sfTime time;
+    float seconds;
+
+    time = sfClock_getElapsedTime(bird->clock);
+    seconds = time.microseconds / 1000000.0;
+    if (seconds > 0.1) {
+        move_rect(bird->rect, bird);
+        move_bird_end(bird, window);
+        sfClock_restart(bird->clock);
+    }
+    place_bird(window, bird);
+}
+
+void kill_end_bird(sfEvent *event, window_s *window,
+    audio_s *audio, bird_s *bird)
+{
+    sfVector2i mouse_pos;
+
+    if (event->type == sfEvtMouseButtonPressed) {
+        mouse_pos = sfMouse_getPositionRenderWindow(window->window_info);
+        gun_shot(audio);
+        if (mouse_pos.x >= bird->bird_pos.x &&
+        mouse_pos.x <= bird->bird_pos.x + 110 &&
+        mouse_pos.y >= bird->bird_pos.y &&
+        mouse_pos.y <= bird->bird_pos.y + 110) {
+            duck_noise(audio);
+            window->restart = 1;
+        }
+    }
+}
+
+void get_end_event(window_s *window, bird_s *bird,
+    audio_s *audio, sfEvent event)
+{
+    while (sfRenderWindow_pollEvent(window->window_info, &event)) {
+        leave_game(window, event);
+        sound(&event, audio);
+        volume(&event, audio);
+        kill_end_bird(&event, window, audio, bird);
+    }
+}
+
+void end_screen_display(window_s *window, background_s  *background,
+    end_s *end, bird_s *bird)
+{
+    sfRenderWindow_drawSprite(window->window_info,
+    background->background_sprite, NULL);
+    sfRenderWindow_drawText(window->window_info,
+    end->game_over, NULL);
+    sfRenderWindow_drawText(window->window_info,
+    end->infos, NULL);
+    bird_loop_end(bird, window);
+    sfRenderWindow_display(window->window_info);
+}
+
+void end_screen(window_s *window, background_s *background, audio_s *audio)
+{
+    sfEvent event;
+    end_s end;
+    bird_s bird;
+
+    init_end(&end, window);
+    init_bird_end(&bird, window);
+    while (sfRenderWindow_isOpen(window->window_info) && !window->restart) {
+        sfRenderWindow_clear(window->window_info, sfBlack);
+        end_screen_display(window, background, &end, &bird);
+        get_end_event(window, &bird, audio, event);
+    }
+    destroy_end(&end, &bird);
+}

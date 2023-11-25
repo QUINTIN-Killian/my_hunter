@@ -11,6 +11,7 @@
 
 void init_window(window_s *window)
 {
+    window->restart = 1;
     window->start = 0;
     window->lives = 3;
     window->nb_max_bird = 1;
@@ -24,4 +25,14 @@ void init_window(window_s *window)
     window->window_info = sfRenderWindow_create(window->video_mode,
     window->window_name, sfClose, NULL);
     window->window_size = sfRenderWindow_getSize(window->window_info);
+}
+
+void reinit_window(window_s *window)
+{
+    window->start = 0;
+    window->lives = 3;
+    window->nb_max_bird = 1;
+    window->game_status = 1;
+    window->score = 0;
+    window->velocity = 0.1;
 }

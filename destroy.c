@@ -17,8 +17,6 @@ void destroy_main(window_s *window, bird_s *bird_tab)
         sfTexture_destroy(bird_tab[i].bird_texture);
         sfSprite_destroy(bird_tab[i].bird_sprite);
     }
-    free(bird_tab);
-    sfRenderWindow_destroy(window->window_info);
 }
 
 void destroy_start(background_s *background, display_start_s *display_start,
@@ -54,4 +52,16 @@ void destroy_game(score_s *score, heart_s *heart_tab)
         sfSprite_destroy(heart_tab[i].heart_sprite);
     }
     free(heart_tab);
+}
+
+void destroy_end(end_s *end, bird_s *bird)
+{
+    sfText_destroy(end->game_over);
+    sfFont_destroy(end->game_over_font);
+    sfText_destroy(end->infos);
+    sfFont_destroy(end->infos_font);
+    free(bird->rect);
+    sfTexture_destroy(bird->bird_texture);
+    sfSprite_destroy(bird->bird_sprite);
+    sfClock_destroy(bird->clock);
 }

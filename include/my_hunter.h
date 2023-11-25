@@ -32,6 +32,7 @@ typedef struct background {
 } background_s;
 
 typedef struct window {
+    int restart;
     int start;
     int lives;
     int nb_max_bird;
@@ -78,11 +79,25 @@ typedef struct display_start {
     sfVector2f launch_info_pos;
 } display_start_s;
 
+typedef struct end {
+    sfText *game_over;
+    sfFont *game_over_font;
+    sfVector2f game_over_pos;
+    sfText *infos;
+    sfFont *infos_font;
+    sfVector2f infos_pos;
+    sfSoundBuffer *end_sound_buff;
+    sfSound *end_sound;
+} end_s;
+
 #ifndef MY_HUNTER_H_
     #define MY_HUNTER_H_
 
 //start.c :
 void init_start(display_start_s *display_start, window_s *window);
+
+//end.c :
+void init_end(end_s *end, window_s *window);
 
 //audio.c :
 void init_audio(audio_s *audio);
@@ -96,6 +111,7 @@ void init_background(background_s *background);
 
 //window.c :
 void init_window(window_s *window);
+void reinit_window(window_s *window);
 
 //bird.c :
 void first_init_bird(bird_s *bird, window_s *window, int i);
@@ -122,6 +138,9 @@ void starting_screen(bird_s *bird_tab, window_s *window);
 void main_loop(background_s *background, bird_s *bird_tab,
     window_s *window, audio_s *audio);
 
+//end_game.c :
+void end_screen(window_s *window, background_s *background, audio_s *audio);
+
 //my_functions.c :
 int my_randomizer(int nb);
 char *convert_int_to_str(int nbr);
@@ -137,5 +156,6 @@ void destroy_main(window_s *window, bird_s *bird_tab);
 void destroy_start(background_s *background, display_start_s *display_start,
     bird_s *bird, audio_s *audio);
 void destroy_game(score_s *score, heart_s *heart_tab);
+void destroy_end(end_s *end, bird_s *bird);
 
 #endif

@@ -7,9 +7,6 @@
 */
 /*
 NOTES :
-    - gérer fin de game
-        - 3 vies (difficulté normal)
-        - 1 vie (difficulté hard)
     - fix taille du fichier de la musique principale
     - VALGRIND !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     - enregistrer scores dans un fichier txt caché

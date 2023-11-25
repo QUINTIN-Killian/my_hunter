@@ -27,7 +27,8 @@ void init_audio(audio_s *audio)
 
 sfMusic *generate_main_music(void)
 {
-    sfMusic *main_music = sfMusic_createFromFile("music/main_theme_music.wav");
+    sfMusic *main_music =
+    sfMusic_createFromFile("music/main_theme_music.flac");
 
     sfMusic_setVolume(main_music, 50.0);
     sfMusic_play(main_music);

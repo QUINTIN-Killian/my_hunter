@@ -16,6 +16,16 @@ static void leave_game(window_s *window, sfEvent event)
     }
 }
 
+static void print_end_stat(end_s *end, window_s *window)
+{
+    sfRenderWindow_drawText(window->window_info, end->game_over, NULL);
+    sfRenderWindow_drawText(window->window_info, end->infos, NULL);
+    sfRenderWindow_drawText(window->window_info, end->score, NULL);
+    sfRenderWindow_drawText(window->window_info, end->n_score, NULL);
+    sfRenderWindow_drawText(window->window_info, end->shots, NULL);
+    sfRenderWindow_drawText(window->window_info, end->n_shots, NULL);
+}
+
 static void init_bird_end(bird_s *bird, window_s *window)
 {
     init_rect(bird);
@@ -85,7 +95,7 @@ void get_end_event(window_s *window, bird_s *bird,
     }
 }
 
-void end_screen_display(window_s *window, background_s  *background,
+void end_screen_display(window_s *window, background_s *background,
     end_s *end, bird_s *bird)
 {
     sfRenderWindow_drawSprite(window->window_info,
@@ -94,6 +104,7 @@ void end_screen_display(window_s *window, background_s  *background,
     end->game_over, NULL);
     sfRenderWindow_drawText(window->window_info,
     end->infos, NULL);
+    print_end_stat(end, window);
     bird_loop_end(bird, window);
     sfRenderWindow_display(window->window_info);
 }

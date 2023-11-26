@@ -38,6 +38,7 @@ typedef struct window {
     int nb_max_bird;
     int game_status;
     int score;
+    int nb_shot;
     float velocity;
     sfRenderWindow *window_info;
     sfVector2u window_size;
@@ -57,6 +58,7 @@ typedef struct bird {
 typedef struct score {
     sfText *score;
     sfFont *score_font;
+    sfVector2f score_pos;
     sfText *n_score;
     sfFont *n_score_font;
     sfVector2f n_score_pos;
@@ -80,14 +82,25 @@ typedef struct display_start {
 } display_start_s;
 
 typedef struct end {
+    char *temp;
     sfText *game_over;
     sfFont *game_over_font;
     sfVector2f game_over_pos;
     sfText *infos;
     sfFont *infos_font;
     sfVector2f infos_pos;
-    sfSoundBuffer *end_sound_buff;
-    sfSound *end_sound;
+    sfText *score;
+    sfFont *score_font;
+    sfVector2f score_pos;
+    sfText *n_score;
+    sfFont *n_score_font;
+    sfVector2f n_score_pos;
+    sfText *shots;
+    sfFont *shots_font;
+    sfVector2f shots_pos;
+    sfText *n_shots;
+    sfFont *n_shots_font;
+    sfVector2f n_shots_pos;
 } end_s;
 
 #ifndef MY_HUNTER_H_

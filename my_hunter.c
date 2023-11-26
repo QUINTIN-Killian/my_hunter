@@ -67,6 +67,6 @@ void main_loop(background_s *background, bird_s *bird_tab,
         main_loop1(window, background, heart_tab, &score);
         main_loop2(window, bird_tab, audio);
     }
-    destroy_game(&score, heart_tab);
     end_screen(window, background, audio);
+    destroy_game(&score, heart_tab);
 }

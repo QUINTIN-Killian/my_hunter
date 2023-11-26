@@ -90,6 +90,8 @@ void get_event(window_s *window, bird_s *bird_tab, audio_s *audio)
         close_window(&event, window);
         sound(&event, audio);
         volume(&event, audio);
+        if (event.type == sfEvtMouseButtonPressed)
+            window->nb_shot++;
         for (int i = 0; i < 3; i++)
             mouse_click(&event, window, &bird_tab[i], audio);
     }

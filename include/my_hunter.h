@@ -122,12 +122,6 @@ typedef struct end {
 #ifndef MY_HUNTER_H_
     #define MY_HUNTER_H_
 
-//start.c :
-void init_start(display_start_s *display_start, window_s *window);
-
-//end.c :
-void init_end(end_s *end, window_s *window);
-
 //audio.c :
 void init_audio(audio_s *audio);
 sfMusic *generate_main_music(void);
@@ -138,12 +132,10 @@ void buzzer_sound(audio_s *audio);
 //background.c :
 void init_background(background_s *background);
 
-//scope.c :
-void init_scope(window_s *window);
-
-//window.c :
-void init_window(window_s *window);
-void reinit_window(window_s *window);
+//best_score.c :
+int get_file_size(void);
+char *get_nb_file(void);
+void refresh_file(int file_nb, int nb_comp);
 
 //bird.c :
 void first_init_bird(bird_s *bird, window_s *window, int i);
@@ -151,17 +143,49 @@ void init_bird(bird_s *bird, window_s *window);
 void place_bird(window_s *window, bird_s *bird);
 void move_bird(window_s *window, bird_s *bird, audio_s *audio);
 
+//destroy.c :
+void destroy_main_end(window_s *window, bird_s *bird_tab);
+void destroy_main(window_s *window, bird_s *bird_tab);
+void destroy_start(background_s *background, display_start_s *display_start,
+    bird_s *bird, audio_s *audio);
+void destroy_game(score_s *score, heart_s *heart_tab);
+void destroy_end(end_s *end, bird_s *bird);
+
+//end.c :
+void init_end(end_s *end, window_s *window);
+
+//events.c :
+void sound(sfEvent *event, audio_s *audio);
+void volume(sfEvent *event, audio_s *audio);
+void move_mouse(sfEvent *event, window_s *window);
+void get_event(window_s *window, bird_s *bird, audio_s *audio);
+
+//heart.c :
+void init_heart(heart_s *heart_tab, window_s *window);
+void print_lives(window_s *window, heart_s *heart_tab);
+
+//my_functions.c :
+int my_randomizer(int nb);
+char *convert_int_to_str(int nbr);
+void change_nb_max_bird(window_s *window);
+
 //rect.c :
 void init_rect(bird_s *bird);
 void move_rect(sfIntRect *rect, bird_s *bird);
+
+//scope.c :
+void init_scope(window_s *window);
 
 //score.c :
 void init_score(score_s *score);
 void print_score(score_s *score, window_s *window);
 
-//heart.c :
-void init_heart(heart_s *heart_tab, window_s *window);
-void print_lives(window_s *window, heart_s *heart_tab);
+//start.c :
+void init_start(display_start_s *display_start, window_s *window);
+
+//window.c :
+void init_window(window_s *window);
+void reinit_window(window_s *window);
 
 //starting_game.c :
 void starting_screen(bird_s *bird_tab, window_s *window);
@@ -172,29 +196,5 @@ void main_loop(background_s *background, bird_s *bird_tab,
 
 //end_game.c :
 void end_screen(window_s *window, background_s *background, audio_s *audio);
-
-//my_functions.c :
-int my_randomizer(int nb);
-char *convert_int_to_str(int nbr);
-void change_nb_max_bird(window_s *window);
-
-//best_score.c :
-int get_file_size(void);
-char *get_nb_file(void);
-void refresh_file(int file_nb, int nb_comp);
-
-//events.c :
-void sound(sfEvent *event, audio_s *audio);
-void volume(sfEvent *event, audio_s *audio);
-void move_mouse(sfEvent *event, window_s *window);
-void get_event(window_s *window, bird_s *bird, audio_s *audio);
-
-//destroy.c :
-void destroy_main_end(window_s *window, bird_s *bird_tab);
-void destroy_main(window_s *window, bird_s *bird_tab);
-void destroy_start(background_s *background, display_start_s *display_start,
-    bird_s *bird, audio_s *audio);
-void destroy_game(score_s *score, heart_s *heart_tab);
-void destroy_end(end_s *end, bird_s *bird);
 
 #endif

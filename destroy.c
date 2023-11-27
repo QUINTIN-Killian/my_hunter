@@ -68,6 +68,10 @@ void destroy_end(end_s *end, bird_s *bird)
     sfFont_destroy(end->shots_font);
     sfText_destroy(end->n_shots);
     sfFont_destroy(end->n_shots_font);
+    sfText_destroy(end->best_score);
+    sfFont_destroy(end->best_score_font);
+    sfText_destroy(end->n_best_score);
+    sfFont_destroy(end->n_best_score_font);
     free(bird->rect);
     sfTexture_destroy(bird->bird_texture);
     sfSprite_destroy(bird->bird_sprite);

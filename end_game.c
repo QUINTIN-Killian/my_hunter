@@ -22,6 +22,8 @@ static void print_end_stat(end_s *end, window_s *window)
     sfRenderWindow_drawText(window->window_info, end->infos, NULL);
     sfRenderWindow_drawText(window->window_info, end->score, NULL);
     sfRenderWindow_drawText(window->window_info, end->n_score, NULL);
+    sfRenderWindow_drawText(window->window_info, end->best_score, NULL);
+    sfRenderWindow_drawText(window->window_info, end->n_best_score, NULL);
     sfRenderWindow_drawText(window->window_info, end->shots, NULL);
     sfRenderWindow_drawText(window->window_info, end->n_shots, NULL);
 }
@@ -100,10 +102,6 @@ void end_screen_display(window_s *window, background_s *background,
 {
     sfRenderWindow_drawSprite(window->window_info,
     background->background_sprite, NULL);
-    sfRenderWindow_drawText(window->window_info,
-    end->game_over, NULL);
-    sfRenderWindow_drawText(window->window_info,
-    end->infos, NULL);
     print_end_stat(end, window);
     bird_loop_end(bird, window);
     sfRenderWindow_display(window->window_info);
@@ -114,7 +112,10 @@ void end_screen(window_s *window, background_s *background, audio_s *audio)
     sfEvent event;
     end_s end;
     bird_s bird;
+    char *file_str = get_nb_file();
+    int file_nb = convert_str_in_int(file_str);
 
+    refresh_file(file_nb, window->score);
     init_end(&end, window);
     init_bird_end(&bird, window);
     while (sfRenderWindow_isOpen(window->window_info) && !window->restart) {
@@ -122,5 +123,6 @@ void end_screen(window_s *window, background_s *background, audio_s *audio)
         end_screen_display(window, background, &end, &bird);
         get_end_event(window, &bird, audio, event);
     }
+    free(file_str);
     destroy_end(&end, &bird);
 }

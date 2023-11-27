@@ -6,6 +6,9 @@
 ** my_hunter
 */
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <time.h>
 #include <SFML/Graphics.h>
 #include <SFML/Window.h>
@@ -101,6 +104,12 @@ typedef struct end {
     sfText *n_shots;
     sfFont *n_shots_font;
     sfVector2f n_shots_pos;
+    sfText *best_score;
+    sfFont *best_score_font;
+    sfVector2f best_score_pos;
+    sfText *n_best_score;
+    sfFont *n_best_score_font;
+    sfVector2f n_best_score_pos;
 } end_s;
 
 #ifndef MY_HUNTER_H_
@@ -158,6 +167,11 @@ void end_screen(window_s *window, background_s *background, audio_s *audio);
 int my_randomizer(int nb);
 char *convert_int_to_str(int nbr);
 void change_nb_max_bird(window_s *window);
+
+//best_score.c :
+int get_file_size(void);
+char *get_nb_file(void);
+void refresh_file(int file_nb, int nb_comp);
 
 //events.c :
 void sound(sfEvent *event, audio_s *audio);

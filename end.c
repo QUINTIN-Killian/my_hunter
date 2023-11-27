@@ -55,11 +55,33 @@ static void init_end_score(window_s *window, end_s *end)
     free(end->temp);
 }
 
+static void init_end_best_score(window_s *window, end_s *end)
+{
+    end->best_score = sfText_create();
+    end->best_score_font = sfFont_createFromFile("font/impact.ttf");
+    end->best_score_pos = (sfVector2f){100, 250};
+    sfText_setFillColor(end->best_score, sfMagenta);
+    sfText_setFont(end->best_score, end->best_score_font);
+    sfText_setString(end->best_score, "- Best score : ");
+    sfText_setOutlineThickness(end->best_score, 1.0);
+    sfText_setPosition(end->best_score, end->best_score_pos);
+    end-> n_best_score = sfText_create();
+    end->n_best_score_font = sfFont_createFromFile("font/impact.ttf");
+    end->n_best_score_pos = (sfVector2f){270, 250};
+    sfText_setFillColor(end->n_best_score, sfMagenta);
+    sfText_setFont(end->n_best_score, end->n_best_score_font);
+    end->temp = get_nb_file();
+    sfText_setString(end->n_best_score, end->temp);
+    sfText_setOutlineThickness(end->n_best_score, 1.0);
+    sfText_setPosition(end->n_best_score, end->n_best_score_pos);
+    free(end->temp);
+}
+
 static void init_end_shots(window_s *window, end_s *end)
 {
     end->shots = sfText_create();
     end->shots_font = sfFont_createFromFile("font/impact.ttf");
-    end->shots_pos = (sfVector2f){100, 250};
+    end->shots_pos = (sfVector2f){100, 280};
     sfText_setFillColor(end->shots, sfMagenta);
     sfText_setFont(end->shots, end->shots_font);
     sfText_setString(end->shots, "- Total number of shots : ");
@@ -67,7 +89,7 @@ static void init_end_shots(window_s *window, end_s *end)
     sfText_setPosition(end->shots, end->shots_pos);
     end->n_shots = sfText_create();
     end->n_shots_font = sfFont_createFromFile("font/impact.ttf");
-    end->n_shots_pos = (sfVector2f){410, 250};
+    end->n_shots_pos = (sfVector2f){410, 280};
     sfText_setFillColor(end->n_shots, sfMagenta);
     sfText_setFont(end->n_shots, end->n_shots_font);
     end->temp = convert_int_to_str(window->nb_shot);
@@ -81,5 +103,6 @@ void init_end(end_s *end, window_s *window)
 {
     init_main_display_end(window, end);
     init_end_score(window, end);
+    init_end_best_score(window, end);
     init_end_shots(window, end);
 }

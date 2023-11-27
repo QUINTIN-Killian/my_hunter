@@ -18,18 +18,18 @@ static void init_main_display_end(window_s *window, end_s *end)
     sfText_setFont(end->game_over, end->game_over_font);
     sfText_setString(end->game_over, "GAME OVER");
     sfText_setOutlineThickness(end->game_over, 1.0);
-    sfText_setScale(end->game_over, (sfVector2f){3.0, 3.0});
+    sfText_setCharacterSize(end->game_over, 100);
     sfText_setPosition(end->game_over, end->game_over_pos);
     end->infos = sfText_create();
     end->infos_font = sfFont_createFromFile("font/impact.ttf");
-    end->infos_pos = (sfVector2f){window->window_size.x - 620,
+    end->infos_pos = (sfVector2f){window->window_size.x - 580,
     window->window_size.y - 30};
     sfText_setFillColor(end->infos, sfCyan);
     sfText_setFont(end->infos, end->infos_font);
     sfText_setString(end->infos,
     "(Shoot the duck to go back to the main menu or press 'escape' to leave)");
     sfText_setOutlineThickness(end->infos, 1.0);
-    sfText_setScale(end->infos, (sfVector2f){0.7, 0.7});
+    sfText_setCharacterSize(end->infos, 19);
     sfText_setPosition(end->infos, end->infos_pos);
 }
 

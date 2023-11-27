@@ -55,6 +55,7 @@ int main(int ac, char **av)
         return 0;
     srand(time(NULL));
     init_window(&window);
+    sfRenderWindow_setMouseCursorVisible(window.window_info, sfFalse);
     while (window.restart) {
         window.restart = 0;
         for (int i = 0; i < 3; i++)
@@ -63,7 +64,6 @@ int main(int ac, char **av)
         destroy_main(&window, bird_tab);
         reinit_window(&window);
     }
-    free(bird_tab);
-    sfRenderWindow_destroy(window.window_info);
+    destroy_main_end(&window, bird_tab);
     return 0;
 }

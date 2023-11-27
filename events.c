@@ -82,11 +82,23 @@ void volume(sfEvent *event, audio_s *audio)
     volume_down(event, audio);
 }
 
+void move_mouse(sfEvent *event, window_s *window)
+{
+    if (event->type == sfEvtMouseMoved) {
+        window->scope->scope_pos =
+        (sfVector2f){sfMouse_getPositionRenderWindow(window->window_info).x,
+        sfMouse_getPositionRenderWindow(window->window_info).y};
+        sfSprite_setPosition(window->scope->scope_sprite,
+        window->scope->scope_pos);
+    }
+}
+
 void get_event(window_s *window, bird_s *bird_tab, audio_s *audio)
 {
     sfEvent event;
 
     while (sfRenderWindow_pollEvent(window->window_info, &event)) {
+        move_mouse(&event, window);
         close_window(&event, window);
         sound(&event, audio);
         volume(&event, audio);

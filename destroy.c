@@ -9,6 +9,15 @@
 #include "include/my.h"
 #include "include/my_hunter.h"
 
+void destroy_main_end(window_s *window, bird_s *bird_tab)
+{
+    free(bird_tab);
+    sfTexture_destroy(window->scope->scope_texture);
+    sfSprite_destroy(window->scope->scope_sprite);
+    free(window->scope);
+    sfRenderWindow_destroy(window->window_info);
+}
+
 void destroy_main(window_s *window, bird_s *bird_tab)
 {
     for (int i = 0; i < 3; i++) {

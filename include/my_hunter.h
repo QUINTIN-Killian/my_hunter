@@ -34,6 +34,12 @@ typedef struct background {
     sfSprite *background_sprite;
 } background_s;
 
+typedef struct scope {
+    sfTexture *scope_texture;
+    sfSprite *scope_sprite;
+    sfVector2f scope_pos;
+} scope_s;
+
 typedef struct window {
     int restart;
     int start;
@@ -47,6 +53,7 @@ typedef struct window {
     sfVector2u window_size;
     sfVideoMode video_mode;
     char *window_name;
+    scope_s *scope;
 } window_s;
 
 typedef struct bird {
@@ -131,6 +138,9 @@ void buzzer_sound(audio_s *audio);
 //background.c :
 void init_background(background_s *background);
 
+//scope.c :
+void init_scope(window_s *window);
+
 //window.c :
 void init_window(window_s *window);
 void reinit_window(window_s *window);
@@ -176,9 +186,11 @@ void refresh_file(int file_nb, int nb_comp);
 //events.c :
 void sound(sfEvent *event, audio_s *audio);
 void volume(sfEvent *event, audio_s *audio);
+void move_mouse(sfEvent *event, window_s *window);
 void get_event(window_s *window, bird_s *bird, audio_s *audio);
 
 //destroy.c :
+void destroy_main_end(window_s *window, bird_s *bird_tab);
 void destroy_main(window_s *window, bird_s *bird_tab);
 void destroy_start(background_s *background, display_start_s *display_start,
     bird_s *bird, audio_s *audio);

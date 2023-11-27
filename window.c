@@ -11,6 +11,7 @@
 
 void init_window(window_s *window)
 {
+    init_scope(window);
     window->restart = 1;
     window->start = 0;
     window->lives = 3;

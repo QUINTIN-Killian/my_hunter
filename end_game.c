@@ -90,6 +90,7 @@ void get_end_event(window_s *window, bird_s *bird,
     audio_s *audio, sfEvent event)
 {
     while (sfRenderWindow_pollEvent(window->window_info, &event)) {
+        move_mouse(&event, window);
         leave_game(window, event);
         sound(&event, audio);
         volume(&event, audio);
@@ -104,7 +105,8 @@ void end_screen_display(window_s *window, background_s *background,
     background->background_sprite, NULL);
     print_end_stat(end, window);
     bird_loop_end(bird, window);
-    sfRenderWindow_display(window->window_info);
+    sfRenderWindow_drawSprite(window->window_info,
+    window->scope->scope_sprite, NULL);
 }
 
 void end_screen(window_s *window, background_s *background, audio_s *audio)
@@ -122,6 +124,7 @@ void end_screen(window_s *window, background_s *background, audio_s *audio)
         sfRenderWindow_clear(window->window_info, sfBlack);
         end_screen_display(window, background, &end, &bird);
         get_end_event(window, &bird, audio, event);
+        sfRenderWindow_display(window->window_info);
     }
     free(file_str);
     destroy_end(&end, &bird);

@@ -40,9 +40,25 @@ typedef struct scope {
     sfVector2f scope_pos;
 } scope_s;
 
+typedef struct pause {
+    sfText *pause;
+    sfFont *pause_font;
+    sfVector2f pause_pos;
+    sfText *continue_;
+    sfFont *continue_font;
+    sfVector2f continue_pos;
+    sfText *end_game;
+    sfFont *end_game_font;
+    sfVector2f end_game_pos;
+    sfText *leave;
+    sfFont *leave_font;
+    sfVector2f leave_pos;
+} pause_s;
+
 typedef struct window {
     int restart;
     int start;
+    int pause;
     int lives;
     int nb_max_bird;
     int game_status;
@@ -169,6 +185,11 @@ int my_randomizer(int nb);
 char *convert_int_to_str(int nbr);
 void change_nb_max_bird(window_s *window);
 
+//pause.c :
+void init_pause_menu(pause_s *pause);
+void display_pause(pause_s *pause, window_s *window);
+void destroy_pause(pause_s *pause, bird_s *bird_tab);
+
 //rect.c :
 void init_rect(bird_s *bird);
 void move_rect(sfIntRect *rect, bird_s *bird);
@@ -193,6 +214,9 @@ void starting_screen(bird_s *bird_tab, window_s *window);
 //my_hunter.c :
 void main_loop(background_s *background, bird_s *bird_tab,
     window_s *window, audio_s *audio);
+
+//pause_menu.c :
+void pause_menu(window_s *window, background_s *background, audio_s *audio);
 
 //end_game.c :
 void end_screen(window_s *window, background_s *background, audio_s *audio);

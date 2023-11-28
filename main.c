@@ -7,10 +7,8 @@
 */
 /*
 NOTES :
-    - afficher score à la fin
-    - enregistrer scores dans un fichier txt caché
+    - menu pause
     - VALGRIND !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    - changer curseur in game
     BONUS :
         - easter egg changement de langue
 */

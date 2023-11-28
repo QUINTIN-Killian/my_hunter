@@ -54,6 +54,7 @@ static void main_loop2(window_s *window, bird_s *bird_tab, audio_s *audio)
     sfRenderWindow_drawSprite(window->window_info,
     window->scope->scope_sprite, NULL);
     get_event(window, bird_tab, audio);
+    sfRenderWindow_display(window->window_info);
 }
 
 void main_loop(background_s *background, bird_s *bird_tab,
@@ -67,7 +68,7 @@ void main_loop(background_s *background, bird_s *bird_tab,
     while (sfRenderWindow_isOpen(window->window_info) && window->game_status) {
         main_loop1(window, background, heart_tab, &score);
         main_loop2(window, bird_tab, audio);
-        sfRenderWindow_display(window->window_info);
+        pause_menu(window, background, audio);
     }
     end_screen(window, background, audio);
     destroy_game(&score, heart_tab);

@@ -10,7 +10,8 @@ SRC	=	$(wildcard *.c)
 
 BIN_NAME	=	my_hunter
 
-FLAGS	=	-lcsfml-graphics -lcsfml-system -lcsfml-audio -lcsfml-window -g3
+FLAGS	=	-lcsfml-graphics -lcsfml-system -lcsfml-audio	\
+			-lcsfml-window -g3 -W -Wall
 
 all:	compile_lib compile
 

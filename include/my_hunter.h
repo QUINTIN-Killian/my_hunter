@@ -161,7 +161,7 @@ void move_bird(window_s *window, bird_s *bird, audio_s *audio);
 
 //destroy.c :
 void destroy_main_end(window_s *window, bird_s *bird_tab);
-void destroy_main(window_s *window, bird_s *bird_tab);
+void destroy_main(bird_s *bird_tab);
 void destroy_start(background_s *background, display_start_s *display_start,
     bird_s *bird, audio_s *audio);
 void destroy_game(score_s *score, heart_s *heart_tab);

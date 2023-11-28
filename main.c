@@ -58,7 +58,7 @@ int main(int ac, char **av)
         for (int i = 0; i < 3; i++)
             first_init_bird(&bird_tab[i], &window, i + 1);
         starting_screen(bird_tab, &window);
-        destroy_main(&window, bird_tab);
+        destroy_main(bird_tab);
         reinit_window(&window);
     }
     destroy_main_end(&window, bird_tab);

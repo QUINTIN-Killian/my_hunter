@@ -18,7 +18,7 @@ void destroy_main_end(window_s *window, bird_s *bird_tab)
     sfRenderWindow_destroy(window->window_info);
 }
 
-void destroy_main(window_s *window, bird_s *bird_tab)
+void destroy_main(bird_s *bird_tab)
 {
     for (int i = 0; i < 3; i++) {
         free(bird_tab[i].rect);

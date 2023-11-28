@@ -15,7 +15,7 @@ static void close_window(sfEvent *event, window_s *window)
         sfRenderWindow_close(window->window_info);
 }
 
-static void pause_game(sfEvent *event, window_s *window)
+static void pause_game(window_s *window)
 {
     if (sfKeyboard_isKeyPressed(sfKeyEscape))
         window->pause = 1;
@@ -106,7 +106,7 @@ void get_event(window_s *window, bird_s *bird_tab, audio_s *audio)
     while (sfRenderWindow_pollEvent(window->window_info, &event)) {
         move_mouse(&event, window);
         close_window(&event, window);
-        pause_game(&event, window);
+        pause_game(window);
         sound(&event, audio);
         volume(&event, audio);
         if (event.type == sfEvtMouseButtonPressed)

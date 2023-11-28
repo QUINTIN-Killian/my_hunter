@@ -55,7 +55,7 @@ static void init_end_score(window_s *window, end_s *end)
     free(end->temp);
 }
 
-static void init_end_best_score(window_s *window, end_s *end)
+static void init_end_best_score(end_s *end)
 {
     end->best_score = sfText_create();
     end->best_score_font = sfFont_createFromFile("font/impact.ttf");
@@ -103,6 +103,6 @@ void init_end(end_s *end, window_s *window)
 {
     init_main_display_end(window, end);
     init_end_score(window, end);
-    init_end_best_score(window, end);
+    init_end_best_score(end);
     init_end_shots(window, end);
 }

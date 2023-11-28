@@ -7,7 +7,6 @@
 */
 /*
 NOTES :
-    - menu pause
     - VALGRIND !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     BONUS :
         - easter egg changement de langue

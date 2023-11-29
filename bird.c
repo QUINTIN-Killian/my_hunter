@@ -58,7 +58,7 @@ void init_bird(bird_s *bird, window_s *window)
     int temp = bird->dir;
 
     bird->dir = my_randomizer(2);
-    bird->clock = sfClock_create();
+    sfClock_restart(bird->clock);
     set_bird_pos(bird, window, temp);
 }
 

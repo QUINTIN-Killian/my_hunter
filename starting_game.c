@@ -45,7 +45,7 @@ static void init_bird_start(bird_s *bird, window_s *window)
 static void move_bird_start(bird_s *bird, window_s *window)
 {
     if (bird->bird_pos.x >= window->window_size.x + 120) {
-        bird->clock = sfClock_create();
+        sfClock_restart(bird->clock);
         bird->bird_pos = (sfVector2f){-130, window->window_size.y - 200};
         return;
     }

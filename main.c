@@ -7,7 +7,6 @@
 */
 /*
 NOTES :
-    - VALGRIND !
     BONUS :
         - easter egg changement de langue
 */

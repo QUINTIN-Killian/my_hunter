@@ -99,6 +99,9 @@ typedef struct heart {
 } heart_s;
 
 typedef struct display_start {
+    sfTexture *exit_texture;
+    sfSprite *exit_sprite;
+    sfVector2f exit_pos;
     sfText *game_name;
     sfFont *game_name_font;
     sfVector2f game_name_pos;
@@ -108,6 +111,9 @@ typedef struct display_start {
 } display_start_s;
 
 typedef struct end {
+    sfTexture *exit_texture;
+    sfSprite *exit_sprite;
+    sfVector2f exit_pos;
     char *temp;
     sfText *game_over;
     sfFont *game_over_font;

@@ -9,10 +9,24 @@
 #include "include/my.h"
 #include "include/my_hunter.h"
 
-static void leave_game(window_s *window, sfEvent event)
+static void leave_game(window_s *window,
+    display_start_s *display_start, sfEvent event)
 {
-    if (sfKeyboard_isKeyPressed(sfKeyEscape) || event.type == sfEvtClosed) {
+    sfVector2i mouse_pos;
+
+    if (event.type == sfEvtClosed || sfKeyboard_isKeyPressed(sfKeyEscape)) {
         sfRenderWindow_close(window->window_info);
+        return;
+    }
+    if (event.type == sfEvtMouseButtonPressed) {
+        mouse_pos = sfMouse_getPositionRenderWindow(window->window_info);
+        if (mouse_pos.x >= display_start->exit_pos.x &&
+        mouse_pos.x <= display_start->exit_pos.x + 110 &&
+        mouse_pos.y >= display_start->exit_pos.y &&
+        mouse_pos.y <= display_start->exit_pos.y + 110) {
+            sfRenderWindow_close(window->window_info);
+            return;
+        }
     }
 }
 
@@ -74,12 +88,14 @@ void kill_start_bird(sfEvent *event, window_s *window,
     }
 }
 
-void get_start_event(window_s *window, bird_s *bird,
-    audio_s *audio, sfEvent event)
+void get_start_event(window_s *window, display_start_s *display_start,
+    bird_s *bird, audio_s *audio)
 {
+    sfEvent event;
+
     while (sfRenderWindow_pollEvent(window->window_info, &event)) {
         move_mouse(&event, window);
-        leave_game(window, event);
+        leave_game(window, display_start, event);
         sound(&event, audio);
         volume(&event, audio);
         kill_start_bird(&event, window, audio, bird);
@@ -97,12 +113,13 @@ void starting_screen_display(window_s *window, background_s  *background,
     display_start->launch_info, NULL);
     bird_loop_start(bird, window);
     sfRenderWindow_drawSprite(window->window_info,
+    display_start->exit_sprite, NULL);
+    sfRenderWindow_drawSprite(window->window_info,
     window->scope->scope_sprite, NULL);
 }
 
 void starting_screen(bird_s *bird_tab, window_s *window)
 {
-    sfEvent event;
     background_s background;
     display_start_s display_start;
     bird_s bird;
@@ -115,7 +132,7 @@ void starting_screen(bird_s *bird_tab, window_s *window)
     while (sfRenderWindow_isOpen(window->window_info) && window->game_status) {
         sfRenderWindow_clear(window->window_info, sfBlack);
         starting_screen_display(window, &background, &display_start, &bird);
-        get_start_event(window, &bird, &audio, event);
+        get_start_event(window, &display_start, &bird, &audio);
         sfRenderWindow_display(window->window_info);
         if (window->start)
             main_loop(&background, bird_tab, window, &audio);

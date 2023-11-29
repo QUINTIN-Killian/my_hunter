@@ -9,6 +9,17 @@
 #include "include/my.h"
 #include "include/my_hunter.h"
 
+static void init_exit_end(end_s *end)
+{
+    end->exit_texture =
+    sfTexture_createFromFile("images/exit_button.png", NULL);
+    end->exit_sprite = sfSprite_create();
+    end->exit_pos = (sfVector2f){750, 2};
+    sfSprite_setTexture(end->exit_sprite, end->exit_texture, sfFalse);
+    sfSprite_setScale(end->exit_sprite, (sfVector2f){0.15, 0.15});
+    sfSprite_setPosition(end->exit_sprite, end->exit_pos);
+}
+
 static void init_main_display_end(window_s *window, end_s *end)
 {
     end->game_over = sfText_create();
@@ -101,6 +112,7 @@ static void init_end_shots(window_s *window, end_s *end)
 
 void init_end(end_s *end, window_s *window)
 {
+    init_exit_end(end);
     init_main_display_end(window, end);
     init_end_score(window, end);
     init_end_best_score(end);

@@ -9,10 +9,23 @@
 #include "include/my.h"
 #include "include/my_hunter.h"
 
-static void leave_game(window_s *window, sfEvent event)
+static void leave_game(window_s *window, end_s *end, sfEvent event)
 {
-    if (sfKeyboard_isKeyPressed(sfKeyEscape) || event.type == sfEvtClosed) {
+    sfVector2i mouse_pos;
+
+    if (event.type == sfEvtClosed || sfKeyboard_isKeyPressed(sfKeyEscape)) {
         sfRenderWindow_close(window->window_info);
+        return;
+    }
+    if (event.type == sfEvtMouseButtonPressed) {
+        mouse_pos = sfMouse_getPositionRenderWindow(window->window_info);
+        if (mouse_pos.x >= end->exit_pos.x &&
+        mouse_pos.x <= end->exit_pos.x + 110 &&
+        mouse_pos.y >= end->exit_pos.y &&
+        mouse_pos.y <= end->exit_pos.y + 110) {
+            sfRenderWindow_close(window->window_info);
+            return;
+        }
     }
 }
 
@@ -86,12 +99,14 @@ void kill_end_bird(sfEvent *event, window_s *window,
     }
 }
 
-void get_end_event(window_s *window, bird_s *bird,
-    audio_s *audio, sfEvent event)
+void get_end_event(window_s *window, end_s *end, bird_s *bird,
+    audio_s *audio)
 {
+    sfEvent event;
+
     while (sfRenderWindow_pollEvent(window->window_info, &event)) {
         move_mouse(&event, window);
-        leave_game(window, event);
+        leave_game(window, end, event);
         sound(&event, audio);
         volume(&event, audio);
         kill_end_bird(&event, window, audio, bird);
@@ -106,12 +121,13 @@ void end_screen_display(window_s *window, background_s *background,
     print_end_stat(end, window);
     bird_loop_end(bird, window);
     sfRenderWindow_drawSprite(window->window_info,
+    end->exit_sprite, NULL);
+    sfRenderWindow_drawSprite(window->window_info,
     window->scope->scope_sprite, NULL);
 }
 
 void end_screen(window_s *window, background_s *background, audio_s *audio)
 {
-    sfEvent event;
     end_s end;
     bird_s bird;
     char *file_str = get_nb_file();
@@ -123,7 +139,7 @@ void end_screen(window_s *window, background_s *background, audio_s *audio)
     while (sfRenderWindow_isOpen(window->window_info) && !window->restart) {
         sfRenderWindow_clear(window->window_info, sfBlack);
         end_screen_display(window, background, &end, &bird);
-        get_end_event(window, &bird, audio, event);
+        get_end_event(window, &end, &bird, audio);
         sfRenderWindow_display(window->window_info);
     }
     free(file_str);

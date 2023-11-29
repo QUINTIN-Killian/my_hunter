@@ -33,6 +33,8 @@ void destroy_start(background_s *background, display_start_s *display_start,
 {
     sfTexture_destroy(background->background_texture);
     sfSprite_destroy(background->background_sprite);
+    sfTexture_destroy(display_start->exit_texture);
+    sfSprite_destroy(display_start->exit_sprite);
     sfText_destroy(display_start->game_name);
     sfFont_destroy(display_start->game_name_font);
     sfText_destroy(display_start->launch_info);
@@ -63,7 +65,7 @@ void destroy_game(score_s *score, heart_s *heart_tab)
     free(heart_tab);
 }
 
-void destroy_end(end_s *end, bird_s *bird)
+static void destroy_end_text(end_s *end)
 {
     sfText_destroy(end->game_over);
     sfFont_destroy(end->game_over_font);
@@ -81,6 +83,13 @@ void destroy_end(end_s *end, bird_s *bird)
     sfFont_destroy(end->best_score_font);
     sfText_destroy(end->n_best_score);
     sfFont_destroy(end->n_best_score_font);
+}
+
+void destroy_end(end_s *end, bird_s *bird)
+{
+    sfTexture_destroy(end->exit_texture);
+    sfSprite_destroy(end->exit_sprite);
+    destroy_end_text(end);
     free(bird->rect);
     sfTexture_destroy(bird->bird_texture);
     sfSprite_destroy(bird->bird_sprite);

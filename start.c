@@ -31,6 +31,14 @@ static void set_start(display_start_s *display_start)
 
 void init_start(display_start_s *display_start, window_s *window)
 {
+    display_start->exit_texture =
+    sfTexture_createFromFile("images/exit_button.png", NULL);
+    display_start->exit_sprite = sfSprite_create();
+    display_start->exit_pos = (sfVector2f){750, 2};
+    sfSprite_setTexture(display_start->exit_sprite,
+    display_start->exit_texture, sfFalse);
+    sfSprite_setScale(display_start->exit_sprite, (sfVector2f){0.15, 0.15});
+    sfSprite_setPosition(display_start->exit_sprite, display_start->exit_pos);
     display_start->game_name = sfText_create();
     display_start->game_name_font = sfFont_createFromFile("font/impact.ttf");
     display_start->game_name_pos = (sfVector2f){100, 100};

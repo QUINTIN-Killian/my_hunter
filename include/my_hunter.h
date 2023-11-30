@@ -145,8 +145,8 @@ typedef struct end {
     #define MY_HUNTER_H_
 
 //audio.c :
-void init_audio(audio_s *audio);
-sfMusic *generate_main_music(void);
+void init_audio(audio_s *audio, int n);
+sfMusic *generate_main_music(int n);
 void gun_shot(audio_s *audio);
 void duck_noise(audio_s *audio);
 void buzzer_sound(audio_s *audio);
@@ -215,7 +215,7 @@ void init_window(window_s *window);
 void reinit_window(window_s *window);
 
 //starting_game.c :
-void starting_screen(bird_s *bird_tab, window_s *window);
+void starting_screen(bird_s *bird_tab, window_s *window, int n);
 
 //my_hunter.c :
 void main_loop(background_s *background, bird_s *bird_tab,

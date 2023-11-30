@@ -42,6 +42,15 @@ static int flags(int ac, char **av)
     return 0;
 }
 
+static int is_paqueta(int ac, char **av)
+{
+    for (int i = 1; i < ac; i++) {
+        if (my_strcmp(av[i], "-paqueta") == 0)
+            return 1;
+    }
+    return 0;
+}
+
 int main(int ac, char **av)
 {
     window_s window;
@@ -56,7 +65,7 @@ int main(int ac, char **av)
         window.restart = 0;
         for (int i = 0; i < 3; i++)
             first_init_bird(&bird_tab[i], &window, i + 1);
-        starting_screen(bird_tab, &window);
+        starting_screen(bird_tab, &window, is_paqueta(ac, av));
         destroy_main(bird_tab);
         reinit_window(&window);
     }

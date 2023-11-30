@@ -9,7 +9,7 @@
 #include "include/my.h"
 #include "include/my_hunter.h"
 
-void init_audio(audio_s *audio)
+void init_audio(audio_s *audio, int n)
 {
     audio->gun_shot_buff = sfSoundBuffer_createFromFile("music/gun_shot.ogg");
     audio->duck_noise_buff =
@@ -19,17 +19,23 @@ void init_audio(audio_s *audio)
     audio->gun_shot = sfSound_create();
     audio->duck_noise = sfSound_create();
     audio->buzzer_sound = sfSound_create();
-    audio->main_music = generate_main_music();
+    audio->main_music = generate_main_music(n);
     sfSound_setBuffer(audio->gun_shot, audio->gun_shot_buff);
     sfSound_setBuffer(audio->duck_noise, audio->duck_noise_buff);
     sfSound_setBuffer(audio->buzzer_sound, audio->buzzer_sound_buff);
 }
 
-sfMusic *generate_main_music(void)
+sfMusic *generate_main_music(int n)
 {
-    sfMusic *main_music =
-    sfMusic_createFromFile("music/main_theme_music.flac");
+    sfMusic *main_music;
 
+    if (n) {
+        main_music =
+        sfMusic_createFromFile("music/GAMBINO-PAQUETA_cut.ogg");
+    } else {
+        main_music =
+        sfMusic_createFromFile("music/main_theme_music.flac");
+    }
     sfMusic_setVolume(main_music, 50.0);
     sfMusic_play(main_music);
     sfMusic_setLoop(main_music, sfTrue);

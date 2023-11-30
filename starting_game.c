@@ -118,7 +118,7 @@ void starting_screen_display(window_s *window, background_s  *background,
     window->scope->scope_sprite, NULL);
 }
 
-void starting_screen(bird_s *bird_tab, window_s *window)
+void starting_screen(bird_s *bird_tab, window_s *window, int n)
 {
     background_s background;
     display_start_s display_start;
@@ -128,7 +128,7 @@ void starting_screen(bird_s *bird_tab, window_s *window)
     init_background(&background);
     init_start(&display_start, window);
     init_bird_start(&bird, window);
-    init_audio(&audio);
+    init_audio(&audio, n);
     while (sfRenderWindow_isOpen(window->window_info) && window->game_status) {
         sfRenderWindow_clear(window->window_info, sfBlack);
         starting_screen_display(window, &background, &display_start, &bird);

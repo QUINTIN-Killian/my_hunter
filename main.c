@@ -25,6 +25,8 @@ static void print_help(void)
     my_putstr("    You will lose if you let 3 ducks cross the screen.\n");
     my_putstr("Inputs :\n");
     my_putstr("    './my_hunter -h' to get help.\n");
+    my_putstr("    './my_hunter -paqueta' to remind you a funny\n");
+    my_putstr("    french reference.\n");
     my_putstr("Commands :\n");
     my_putstr("    Press 'escape' in game to open the pause menu.\n");
     my_putstr("    Press 'space' in game to turn on/off the main music.\n");

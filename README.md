@@ -6,7 +6,7 @@ my_hunter is a video game recreating the famous Duck Hunt game.
 
 ## 🧠 Description
 
-The goal is to shoot ducks to make the best possible score.
+The goal is to shoot ducks to make the best possible score, without letting three of them go off screen.
 
 ---
 
